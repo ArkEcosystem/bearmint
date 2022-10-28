@@ -1,71 +1,71 @@
 {
-    "name": "@bearmint/bep-093",
-    "version": "0.0.0",
-    "description": "This library is the official reference implementation for BEP-093 (https://bep.dev/093)",
-    "keywords": [
-        "bearmint",
-        "tendermint",
-        "blockchain",
-        "framework",
-        "modular"
-    ],
-    "homepage": "https://github.com/bearmint/bearmint",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/bearmint/bearmint.git"
-    },
-    "funding": "https://funding.bearmint.com/",
-    "license": "MIT",
-    "author": "Bearmint Mining Company <hello@bearmint.com> (https://bearmint.com/)",
-    "type": "module",
-    "exports": "./distribution/index.js",
-    "types": "./distribution/index.d.ts",
-    "bin": {
-        "bep93": "./bin/index.mjs"
-    },
-    "files": [
-        "bin",
-        "distribution"
-    ],
-    "scripts": {
-        "audit": "pnpm audit --fix --prod",
-        "build": "pnpm run clean && tsc",
-        "build:watch": "pnpm run clean && tsc -w",
-        "clean": "rm -rf distribution",
-        "depcheck": "depcheck --ignores=@bearmint/bep-004,@bearmint/bep-005,@bearmint/bep-031,@bearmint/bep-039",
-        "deps:major": "ncu -u --target=latest",
-        "deps:minor": "ncu -u --target=minor",
-        "deps:patch": "ncu -u --target=patch",
-        "docs": "typedoc source",
-        "knip": "knip",
-        "lint": "eslint 'source/**/*.ts' --format=codeframe --config=../../config/eslintrc.js --fix",
-        "prepack": "pnpm run build",
-        "test": "pnpm run test:unit",
-        "test:coverage": "pnpm run test:unit:coverage",
-        "test:ui": "vitest --ui",
-        "test:unit": "vitest run tests/unit",
-        "test:unit:coverage": "vitest run tests/unit --coverage",
-        "test:unit:ui": "vitest tests/unit --ui",
-        "test:unit:watch": "vitest tests/unit",
-        "test:watch": "vitest"
-    },
-    "dependencies": {
-        "@bearmint/bep-009": "workspace:^",
-        "@bearmint/bep-013": "workspace:^",
-        "@bearmint/bep-033": "workspace:^",
-        "@bearmint/bep-042": "workspace:^",
-        "@bearmint/bep-091": "workspace:^",
-        "clipanion": "3.2.0-rc.13",
-        "typanion": "^3.12.1"
-    },
-    "devDependencies": {
-        "@bearmint/bep-005": "workspace:^"
-    },
-    "engines": {
-        "node": ">=18",
-        "pnpm": ">=7.9.0"
-    },
-    "publishConfig": {
-        "access": "public"
-    }
+	"name": "@bearmint/bep-093",
+	"version": "0.0.0",
+	"description": "This library is the official reference implementation for BEP-093 (https://bep.dev/093)",
+	"keywords": [
+		"bearmint",
+		"tendermint",
+		"blockchain",
+		"framework",
+		"modular"
+	],
+	"homepage": "https://github.com/bearmint/bearmint",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bearmint/bearmint.git"
+	},
+	"funding": "https://funding.bearmint.com/",
+	"license": "MIT",
+	"author": "Bearmint Mining Company <hello@bearmint.com> (https://bearmint.com/)",
+	"type": "module",
+	"exports": "./distribution/index.js",
+	"types": "./distribution/index.d.ts",
+	"bin": {
+		"bep93": "./bin/index.mjs"
+	},
+	"files": [
+		"bin",
+		"distribution"
+	],
+	"scripts": {
+		"audit": "pnpm audit --fix --prod",
+		"build": "pnpm run clean && tsc",
+		"build:watch": "pnpm run clean && tsc -w",
+		"clean": "rm -rf distribution",
+		"depcheck": "depcheck --ignores=@bearmint/bep-004,@bearmint/bep-005,@bearmint/bep-031,@bearmint/bep-039",
+		"deps:major": "ncu -u --target=latest",
+		"deps:minor": "ncu -u --target=minor",
+		"deps:patch": "ncu -u --target=patch",
+		"docs": "typedoc source",
+		"knip": "knip",
+		"lint": "eslint 'source/**/*.ts' --format=codeframe --config=../../config/eslintrc.js --fix",
+		"prepack": "pnpm run build",
+		"test": "pnpm run test:unit",
+		"test:coverage": "pnpm run test:unit:coverage",
+		"test:ui": "vitest --ui",
+		"test:unit": "vitest run tests/unit",
+		"test:unit:coverage": "vitest run tests/unit --coverage",
+		"test:unit:ui": "vitest tests/unit --ui",
+		"test:unit:watch": "vitest tests/unit",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"@bearmint/bep-009": "workspace:^",
+		"@bearmint/bep-013": "workspace:^",
+		"@bearmint/bep-033": "workspace:^",
+		"@bearmint/bep-042": "workspace:^",
+		"@bearmint/bep-091": "workspace:^",
+		"clipanion": "3.2.0-rc.13",
+		"typanion": "^3.12.1"
+	},
+	"devDependencies": {
+		"@bearmint/bep-005": "workspace:^"
+	},
+	"engines": {
+		"node": ">=18",
+		"pnpm": ">=7.9.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }

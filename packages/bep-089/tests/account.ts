@@ -16,7 +16,7 @@ export function fakeAccountSerializer(context: TxTestContext) {
 	// @ts-ignore
 	return makeAccountSerializer({
 		CommittedState: context.state,
-		DeliverTxState: context.state,
+		ExecuteTxState: context.state,
 		// @ts-ignore
 		EventDispatcher: makeEventDispatcher({ Container: context.container }),
 	})

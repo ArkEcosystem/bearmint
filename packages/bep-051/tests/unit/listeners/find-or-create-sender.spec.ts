@@ -25,7 +25,7 @@ describe<{
 }>('Find or Create Sender Listener', () => {
 	beforeEach(async (context) => {
 		const container = makeContainer()
-		container.bindValue(ContainerType.DeliverTxState, fakeCommittedState())
+		container.bindValue(ContainerType.ExecuteTxState, fakeCommittedState())
 
 		context.eventRecorder = makeEventRecorder()
 
@@ -49,7 +49,7 @@ describe<{
 				AccountSerializer: makeAccountSerializer({
 					AddressFactory: fakeAddressFactory(),
 					CommittedState: context.state,
-					DeliverTxState: context.state,
+					ExecuteTxState: context.state,
 					EventDispatcher: makeEventDispatcher(),
 				}),
 				AddressFactory: fakeAddressFactory(),
@@ -84,7 +84,7 @@ describe<{
 			await makeAccountSerializer({
 				AddressFactory: fakeAddressFactory(),
 				CommittedState: context.state,
-				DeliverTxState: context.state,
+				ExecuteTxState: context.state,
 				EventDispatcher: makeEventDispatcher(),
 			}).deserialize({
 				address: 'bear1vlezq7dtyml3zu3wgfdwdglcalradfnt5xpzahl7a5478hn5g20qxd5nkr',
@@ -97,7 +97,7 @@ describe<{
 				AccountSerializer: makeAccountSerializer({
 					AddressFactory: fakeAddressFactory(),
 					CommittedState: context.state,
-					DeliverTxState: context.state,
+					ExecuteTxState: context.state,
 					EventDispatcher: makeEventDispatcher(),
 				}),
 				AddressFactory: fakeAddressFactory(),
@@ -130,7 +130,7 @@ describe<{
 			makeFindOrCreateSenderListener({
 				AccountSerializer: makeAccountSerializer({
 					CommittedState: context.state,
-					DeliverTxState: context.state,
+					ExecuteTxState: context.state,
 					EventDispatcher: makeEventDispatcher(),
 				}),
 				AddressFactory: fakeAddressFactory(),

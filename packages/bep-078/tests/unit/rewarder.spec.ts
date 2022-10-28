@@ -97,7 +97,7 @@ describe<{
 		const validator = await makeAccountSerializer({
 			AddressFactory: fakeAddressFactory(),
 			CommittedState: context.state,
-			DeliverTxState: context.state,
+			ExecuteTxState: context.state,
 			EventDispatcher: fakeEventDispatcher(),
 		}).deserialize({
 			address: 'bear1vlezq7dtyml3zu3wgfdwdglcalradfnt5xpzahl7a5478hn5g20qxd5nkr',

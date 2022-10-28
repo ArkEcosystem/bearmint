@@ -25,7 +25,7 @@ describe<{
 			accountRepositoryFactory: makeAccountRepository({
 				AccountSerializer: makeAccountSerializer({
 					AddressFactory: fakeAddressFactory(),
-					DeliverTxState: fakeCommittedState(),
+					ExecuteTxState: fakeCommittedState(),
 					EventDispatcher: makeEventDispatcher({ Container: makeContainer() }),
 				}),
 				EventDispatcher: makeEventDispatcher({ Container: makeContainer() }),

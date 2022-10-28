@@ -1,70 +1,70 @@
 {
-    "name": "@bearmint/bep-005",
-    "version": "0.0.0",
-    "private": true,
-    "description": "This library is the official reference implementation for BEP-005 (https://bep.dev/005)",
-    "keywords": [
-        "bearmint",
-        "tendermint",
-        "blockchain",
-        "framework",
-        "modular"
-    ],
-    "homepage": "https://github.com/bearmint/bearmint",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/bearmint/bearmint.git"
-    },
-    "funding": "https://funding.bearmint.com/",
-    "license": "MIT",
-    "author": "Bearmint Mining Company <hello@bearmint.com> (https://bearmint.com/)",
-    "type": "module",
-    "exports": "./distribution/index.js",
-    "types": "./distribution/index.d.ts",
-    "bin": {
-        "roadrunner": "./bin/index.mjs"
-    },
-    "files": [
-        "bin",
-        "distribution"
-    ],
-    "scripts": {
-        "audit": "pnpm audit --fix --prod",
-        "build": "pnpm run clean && tsc",
-        "build:watch": "pnpm run clean && tsc -w",
-        "clean": "rm -rf distribution",
-        "depcheck": "depcheck --ignores=@bearmint/bep-004,@bearmint/bep-005,@bearmint/bep-031,@bearmint/bep-039,globby,meow",
-        "deps:major": "ncu -u --target=latest",
-        "deps:minor": "ncu -u --target=minor",
-        "deps:patch": "ncu -u --target=patch"
-    },
-    "dependencies": {
-        "@bearmint/bep-013": "workspace:^",
-        "@bearmint/bep-018": "workspace:^",
-        "@bearmint/bep-116": "workspace:^",
-        "@sinonjs/fake-timers": "9.1.2",
-        "ansi-styles": "6.2.1",
-        "concordance": "5.0.4",
-        "globby": "13.1.2",
-        "lodash.get": "4.4.2",
-        "lodash.has": "4.5.2",
-        "meow": "^11.0.0",
-        "nock": "13.2.9",
-        "pretty-ms": "8.0.0",
-        "sinon": "14.0.1",
-        "strip-ansi": "7.0.1",
-        "vitest": "^0.24.3"
-    },
-    "devDependencies": {
-        "@types/node": "18.11.7",
-        "@types/sinon": "10.0.13",
-        "@types/sinonjs__fake-timers": "8.1.2"
-    },
-    "engines": {
-        "node": ">=18",
-        "pnpm": ">=7.9.0"
-    },
-    "publishConfig": {
-        "access": "restricted"
-    }
+	"name": "@bearmint/bep-005",
+	"version": "0.0.0",
+	"private": true,
+	"description": "This library is the official reference implementation for BEP-005 (https://bep.dev/005)",
+	"keywords": [
+		"bearmint",
+		"tendermint",
+		"blockchain",
+		"framework",
+		"modular"
+	],
+	"homepage": "https://github.com/bearmint/bearmint",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bearmint/bearmint.git"
+	},
+	"funding": "https://funding.bearmint.com/",
+	"license": "MIT",
+	"author": "Bearmint Mining Company <hello@bearmint.com> (https://bearmint.com/)",
+	"type": "module",
+	"exports": "./distribution/index.js",
+	"types": "./distribution/index.d.ts",
+	"bin": {
+		"roadrunner": "./bin/index.mjs"
+	},
+	"files": [
+		"bin",
+		"distribution"
+	],
+	"scripts": {
+		"audit": "pnpm audit --fix --prod",
+		"build": "pnpm run clean && tsc",
+		"build:watch": "pnpm run clean && tsc -w",
+		"clean": "rm -rf distribution",
+		"depcheck": "depcheck --ignores=@bearmint/bep-004,@bearmint/bep-005,@bearmint/bep-031,@bearmint/bep-039,globby,meow",
+		"deps:major": "ncu -u --target=latest",
+		"deps:minor": "ncu -u --target=minor",
+		"deps:patch": "ncu -u --target=patch"
+	},
+	"dependencies": {
+		"@bearmint/bep-013": "workspace:^",
+		"@bearmint/bep-018": "workspace:^",
+		"@bearmint/bep-116": "workspace:^",
+		"@sinonjs/fake-timers": "9.1.2",
+		"ansi-styles": "6.2.1",
+		"concordance": "5.0.4",
+		"globby": "13.1.2",
+		"lodash.get": "4.4.2",
+		"lodash.has": "4.5.2",
+		"meow": "^11.0.0",
+		"nock": "13.2.9",
+		"pretty-ms": "8.0.0",
+		"sinon": "14.0.1",
+		"strip-ansi": "7.0.1",
+		"vitest": "^0.24.3"
+	},
+	"devDependencies": {
+		"@types/node": "18.11.7",
+		"@types/sinon": "10.0.13",
+		"@types/sinonjs__fake-timers": "8.1.2"
+	},
+	"engines": {
+		"node": ">=18",
+		"pnpm": ">=7.9.0"
+	},
+	"publishConfig": {
+		"access": "restricted"
+	}
 }

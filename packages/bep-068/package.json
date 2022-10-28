@@ -1,76 +1,76 @@
 {
-    "name": "@bearmint/bep-068",
-    "version": "0.0.0",
-    "description": "This library is the official reference implementation for BEP-068 (https://bep.dev/068)",
-    "keywords": [
-        "bearmint",
-        "tendermint",
-        "blockchain",
-        "framework",
-        "modular"
-    ],
-    "homepage": "https://github.com/bearmint/bearmint",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/bearmint/bearmint.git"
-    },
-    "funding": "https://funding.bearmint.com/",
-    "license": "MIT",
-    "author": "Bearmint Mining Company <hello@bearmint.com> (https://bearmint.com/)",
-    "type": "module",
-    "exports": "./distribution/index.js",
-    "types": "./distribution/index.d.ts",
-    "files": [
-        "distribution"
-    ],
-    "scripts": {
-        "audit": "pnpm audit --fix --prod",
-        "build": "pnpm run clean && tsc",
-        "build:watch": "pnpm run clean && tsc -w",
-        "clean": "rm -rf distribution",
-        "depcheck": "depcheck --ignores=@bearmint/bep-004,@bearmint/bep-005,@bearmint/bep-031,@bearmint/bep-039",
-        "deps:major": "ncu -u --target=latest",
-        "deps:minor": "ncu -u --target=minor",
-        "deps:patch": "ncu -u --target=patch",
-        "docs": "typedoc source",
-        "knip": "knip",
-        "lint": "eslint 'source/**/*.ts' --format=codeframe --config=../../config/eslintrc.js --fix",
-        "mime-types": "wget https://raw.githubusercontent.com/jshttp/mime-db/master/db.json -O source/mime-types.json && node scripts/format-mime-types.js",
-        "test": "pnpm run test:integration && pnpm run test:unit",
-        "test:coverage": "pnpm run test:integration:coverage && pnpm run test:unit:coverage",
-        "test:e2e": "vitest run tests/e2e",
-        "test:e2e:coverage": "vitest run tests/e2e --coverage",
-        "test:e2e:ui": "vitest tests/e2e --ui",
-        "test:e2e:watch": "vitest tests/e2e",
-        "test:integration": "vitest run tests/integration",
-        "test:integration:coverage": "vitest run tests/integration --coverage",
-        "test:integration:ui": "vitest tests/integration --ui",
-        "test:integration:watch": "vitest tests/integration",
-        "test:ui": "vitest --ui",
-        "test:unit": "vitest run tests/unit",
-        "test:unit:coverage": "vitest run tests/unit --coverage",
-        "test:unit:ui": "vitest tests/unit --ui",
-        "test:unit:watch": "vitest tests/unit",
-        "test:watch": "vitest"
-    },
-    "dependencies": {
-        "@bearmint/bep-009": "workspace:^",
-        "@bearmint/bep-013": "workspace:^",
-        "@bearmint/bep-016": "workspace:^",
-        "@bearmint/bep-018": "workspace:^",
-        "@bearmint/bep-051": "workspace:^",
-        "@bearmint/bep-109": "workspace:^"
-    },
-    "devDependencies": {
-        "@bearmint/bep-005": "workspace:^",
-        "@bearmint/bep-006": "workspace:^",
-        "@bearmint/bep-053": "workspace:^"
-    },
-    "engines": {
-        "node": ">=18",
-        "pnpm": ">=7.9.0"
-    },
-    "publishConfig": {
-        "access": "public"
-    }
+	"name": "@bearmint/bep-068",
+	"version": "0.0.0",
+	"description": "This library is the official reference implementation for BEP-068 (https://bep.dev/068)",
+	"keywords": [
+		"bearmint",
+		"tendermint",
+		"blockchain",
+		"framework",
+		"modular"
+	],
+	"homepage": "https://github.com/bearmint/bearmint",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bearmint/bearmint.git"
+	},
+	"funding": "https://funding.bearmint.com/",
+	"license": "MIT",
+	"author": "Bearmint Mining Company <hello@bearmint.com> (https://bearmint.com/)",
+	"type": "module",
+	"exports": "./distribution/index.js",
+	"types": "./distribution/index.d.ts",
+	"files": [
+		"distribution"
+	],
+	"scripts": {
+		"audit": "pnpm audit --fix --prod",
+		"build": "pnpm run clean && tsc",
+		"build:watch": "pnpm run clean && tsc -w",
+		"clean": "rm -rf distribution",
+		"depcheck": "depcheck --ignores=@bearmint/bep-004,@bearmint/bep-005,@bearmint/bep-031,@bearmint/bep-039",
+		"deps:major": "ncu -u --target=latest",
+		"deps:minor": "ncu -u --target=minor",
+		"deps:patch": "ncu -u --target=patch",
+		"docs": "typedoc source",
+		"knip": "knip",
+		"lint": "eslint 'source/**/*.ts' --format=codeframe --config=../../config/eslintrc.js --fix",
+		"mime-types": "wget https://raw.githubusercontent.com/jshttp/mime-db/master/db.json -O source/mime-types.json && node scripts/format-mime-types.js",
+		"test": "pnpm run test:integration && pnpm run test:unit",
+		"test:coverage": "pnpm run test:integration:coverage && pnpm run test:unit:coverage",
+		"test:e2e": "vitest run tests/e2e",
+		"test:e2e:coverage": "vitest run tests/e2e --coverage",
+		"test:e2e:ui": "vitest tests/e2e --ui",
+		"test:e2e:watch": "vitest tests/e2e",
+		"test:integration": "vitest run tests/integration",
+		"test:integration:coverage": "vitest run tests/integration --coverage",
+		"test:integration:ui": "vitest tests/integration --ui",
+		"test:integration:watch": "vitest tests/integration",
+		"test:ui": "vitest --ui",
+		"test:unit": "vitest run tests/unit",
+		"test:unit:coverage": "vitest run tests/unit --coverage",
+		"test:unit:ui": "vitest tests/unit --ui",
+		"test:unit:watch": "vitest tests/unit",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"@bearmint/bep-009": "workspace:^",
+		"@bearmint/bep-013": "workspace:^",
+		"@bearmint/bep-016": "workspace:^",
+		"@bearmint/bep-018": "workspace:^",
+		"@bearmint/bep-051": "workspace:^",
+		"@bearmint/bep-109": "workspace:^"
+	},
+	"devDependencies": {
+		"@bearmint/bep-005": "workspace:^",
+		"@bearmint/bep-006": "workspace:^",
+		"@bearmint/bep-053": "workspace:^"
+	},
+	"engines": {
+		"node": ">=18",
+		"pnpm": ">=7.9.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }

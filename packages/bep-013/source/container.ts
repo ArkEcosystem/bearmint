@@ -72,7 +72,7 @@ export enum ContainerType {
 	DataSink = 'DataSink',
 	DelegatorRewarder = 'DelegatorRewarder',
 	DelegatorSlasher = 'DelegatorSlasher',
-	DeliverTxState = 'DeliverTxState',
+	ExecuteTxState = 'ExecuteTxState',
 	EventDispatcher = 'EventDispatcher',
 	EventRecorderFactory = 'EventRecorderFactory',
 	GasCalculator = 'GasCalculator',
@@ -121,7 +121,7 @@ export type Cradle<T = Record<string, unknown>> = {
 	DataSink: DataSink
 	DelegatorRewarder: DelegatorRewarder
 	DelegatorSlasher: SlasherExecutor
-	DeliverTxState: StateStore
+	ExecuteTxState: StateStore
 	EventDispatcher: EventDispatcher
 	EventRecorderFactory: EventRecorderFactory
 	GasCalculator: GasCalculator

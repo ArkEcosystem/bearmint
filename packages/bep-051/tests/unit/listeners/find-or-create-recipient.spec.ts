@@ -24,7 +24,7 @@ describe<{
 }>('Find or Create Recipient', () => {
 	beforeEach(async (context) => {
 		const container = makeContainer()
-		container.bindValue(ContainerType.DeliverTxState, fakeCommittedState())
+		container.bindValue(ContainerType.ExecuteTxState, fakeCommittedState())
 
 		context.eventRecorder = makeEventRecorder()
 
@@ -46,7 +46,7 @@ describe<{
 		await makeFindOrCreateRecipientListener({
 			AccountSerializer: makeAccountSerializer({
 				CommittedState: context.state,
-				DeliverTxState: context.state,
+				ExecuteTxState: context.state,
 				EventDispatcher: makeEventDispatcher(),
 			}),
 			AddressFactory: fakeAddressFactory(),
@@ -72,7 +72,7 @@ describe<{
 		await context.state.getAccountRepository().index([
 			await makeAccountSerializer({
 				CommittedState: context.state,
-				DeliverTxState: context.state,
+				ExecuteTxState: context.state,
 				EventDispatcher: makeEventDispatcher(),
 			}).deserialize({
 				address: 'bear1vlezq7dtyml3zu3wgfdwdglcalradfnt5xpzahl7a5478hn5g20qxd5nkr',
@@ -82,7 +82,7 @@ describe<{
 		await makeFindOrCreateRecipientListener({
 			AccountSerializer: makeAccountSerializer({
 				CommittedState: context.state,
-				DeliverTxState: context.state,
+				ExecuteTxState: context.state,
 				EventDispatcher: makeEventDispatcher(),
 			}),
 			AddressFactory: fakeAddressFactory(),
@@ -115,7 +115,7 @@ describe<{
 			makeFindOrCreateRecipientListener({
 				AccountSerializer: makeAccountSerializer({
 					CommittedState: context.state,
-					DeliverTxState: context.state,
+					ExecuteTxState: context.state,
 					EventDispatcher: makeEventDispatcher(),
 				}),
 				AddressFactory: fakeAddressFactory(),
@@ -153,7 +153,7 @@ describe<{
 			makeFindOrCreateRecipientListener({
 				AccountSerializer: makeAccountSerializer({
 					CommittedState: context.state,
-					DeliverTxState: context.state,
+					ExecuteTxState: context.state,
 					EventDispatcher: makeEventDispatcher(),
 				}),
 				AddressFactory: () => {

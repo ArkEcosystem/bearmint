@@ -49,7 +49,7 @@ describe<{
 		context.strategyRegistry.set('@bearmint/bep-083', '@bearmint/bep-086', BEP86)
 
 		context.container.bindValue(ContainerType.Logger, console)
-		context.container.bindValue(ContainerType.DeliverTxState, context.state)
+		context.container.bindValue(ContainerType.ExecuteTxState, context.state)
 		context.container.bindValue(
 			ContainerType.StakingServiceFactory,
 			makeStakingServiceFactory({ DataSink: { put() {} } }),

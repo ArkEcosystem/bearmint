@@ -121,13 +121,13 @@ export async function makeState(
 			multiStore.checkpoint()
 		},
 		async commit(candidateState?: StateStore) {
-			// CheckTx & DeliverTx don't care about another candidate state
+			// CheckTx & ExecuteTx don't care about another candidate state
 			if (candidateState === undefined) {
 				for (const trie of Object.values(multiStore.all())) {
 					await trie.commit()
 				}
 			} else {
-				// CommittedState cares about all changes from the CandidateState (DeliverTx)
+				// CommittedState cares about all changes from the CandidateState (ExecuteTx)
 				for (const [type, candidateStore] of Object.entries(candidateState.getMultiStore().all())) {
 					const candidateCheckpoints = candidateStore.checkpoints()
 
@@ -137,7 +137,7 @@ export async function makeState(
 
 					const committedStore: KVStore = multiStore.get(type)
 
-					// Take the final checkpoint of the candidate state (DeliverTx)
+					// Take the final checkpoint of the candidate state (ExecuteTx)
 					const candidateCheckpoint = candidateCheckpoints[1]
 
 					assert.defined(candidateCheckpoint)

@@ -59,7 +59,7 @@ describe<{
 		await context.state.getMultiStore().add('@bearmint/bep-120')
 		await context.state.getMultiStore().add('@bearmint/bep-121')
 
-		container.bindValue(ContainerType.DeliverTxState, context.state)
+		container.bindValue(ContainerType.ExecuteTxState, context.state)
 
 		await context.state.getAccountRepository().index([
 			await createValidatorAccount({
@@ -91,7 +91,7 @@ describe<{
 
 		context.subject = makeStrategy({
 			CommittedState: context.state,
-			DeliverTxState: context.state,
+			ExecuteTxState: context.state,
 			EventDispatcher: { dispatchSerial() {} },
 			GenesisParameters: {
 				validators: [],

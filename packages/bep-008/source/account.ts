@@ -22,8 +22,8 @@ export function fakeAccountSerializer(context?: TxTestContext) {
 		return makeAccountSerializer({
 			AddressFactory: fakeAddressFactory(),
 			CommittedState: fakeCommittedState(),
-			DeliverTxState: fakeCommittedState(),
 			EventDispatcher: fakeEventDispatcher(),
+			ExecuteTxState: fakeCommittedState(),
 		})
 	}
 
@@ -31,7 +31,7 @@ export function fakeAccountSerializer(context?: TxTestContext) {
 	return makeAccountSerializer({
 		AddressFactory: context.addressFactory ?? fakeAddressFactory(),
 		CommittedState: context.state ?? fakeCommittedState(),
-		DeliverTxState: context.state ?? fakeCommittedState(),
 		EventDispatcher: fakeEventDispatcher(context),
+		ExecuteTxState: context.state ?? fakeCommittedState(),
 	})
 }

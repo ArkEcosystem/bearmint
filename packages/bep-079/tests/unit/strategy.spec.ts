@@ -22,7 +22,7 @@ describe<{ account: AccountWithValidator; state: StateStore }>('Validator Reward
 			await fakeMultiStore(),
 		)
 
-		container.bindValue(ContainerType.DeliverTxState, context.state)
+		container.bindValue(ContainerType.ExecuteTxState, context.state)
 
 		context.account = {
 			balances: {

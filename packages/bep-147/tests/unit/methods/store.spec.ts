@@ -8,14 +8,14 @@ describe('QueryState', () => {
 	it('should determine if the handler is a match', async () => {
 		expect(
 			await new QueryState().isMatch({
-				data: undefined,
+				data: new Uint8Array(),
 				path: ['store'],
 			}),
 		).toBeTrue()
 
 		expect(
 			await new QueryState().isMatch({
-				data: undefined,
+				data: new Uint8Array(),
 				path: ['store', '@bearmint', 'bep-044'],
 			}),
 		).toBeFalse()

@@ -1,81 +1,81 @@
 {
-    "name": "@bearmint/bep-053",
-    "version": "0.0.0",
-    "private": true,
-    "description": "This library is the official reference implementation for BEP-053 (https://bep.dev/053)",
-    "keywords": [
-        "bearmint",
-        "tendermint",
-        "blockchain",
-        "framework",
-        "modular"
-    ],
-    "homepage": "https://github.com/bearmint/bearmint",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/bearmint/bearmint.git"
-    },
-    "funding": "https://funding.bearmint.com/",
-    "license": "MIT",
-    "author": "Bearmint Mining Company <hello@bearmint.com> (https://bearmint.com/)",
-    "type": "module",
-    "exports": "./distribution/index.js",
-    "types": "./distribution/index.d.ts",
-    "files": [
-        "distribution"
-    ],
-    "scripts": {
-        "audit": "pnpm audit --fix --prod",
-        "build": "pnpm run clean && tsc",
-        "build:watch": "pnpm run clean && tsc -w",
-        "clean": "rm -rf distribution",
-        "depcheck": "depcheck --ignores=@bearmint/bep-004,@bearmint/bep-005,@bearmint/bep-031,@bearmint/bep-039",
-        "deps:major": "ncu -u --target=latest",
-        "deps:minor": "ncu -u --target=minor",
-        "deps:patch": "ncu -u --target=patch",
-        "docs": "typedoc source",
-        "knip": "knip",
-        "lint": "eslint 'source/**/*.ts' --format=codeframe --config=../../config/eslintrc.js --fix"
-    },
-    "dependencies": {
-        "@bearmint/bep-005": "workspace:^",
-        "@bearmint/bep-006": "workspace:^",
-        "@bearmint/bep-008": "workspace:^",
-        "@bearmint/bep-009": "workspace:^",
-        "@bearmint/bep-013": "workspace:^",
-        "@bearmint/bep-014": "workspace:^",
-        "@bearmint/bep-015": "workspace:^",
-        "@bearmint/bep-016": "workspace:^",
-        "@bearmint/bep-018": "workspace:^",
-        "@bearmint/bep-020": "workspace:^",
-        "@bearmint/bep-022": "workspace:^",
-        "@bearmint/bep-023": "workspace:^",
-        "@bearmint/bep-030": "workspace:^",
-        "@bearmint/bep-033": "workspace:^",
-        "@bearmint/bep-034": "workspace:^",
-        "@bearmint/bep-035": "workspace:^",
-        "@bearmint/bep-038": "workspace:^",
-        "@bearmint/bep-042": "workspace:^",
-        "@bearmint/bep-048": "workspace:^",
-        "@bearmint/bep-049": "workspace:^",
-        "@bearmint/bep-050": "workspace:^",
-        "@bearmint/bep-051": "workspace:^",
-        "@bearmint/bep-084": "workspace:^",
-        "@bearmint/bep-085": "workspace:^",
-        "@bearmint/bep-086": "workspace:^",
-        "@bearmint/bep-087": "workspace:^",
-        "@bearmint/bep-088": "workspace:^",
-        "@bearmint/bep-090": "workspace:^",
-        "@bearmint/bep-099": "workspace:^",
-        "@bearmint/bep-109": "workspace:^",
-        "@bearmint/bep-146": "workspace:^",
-        "@scure/bip39": "1.1.0"
-    },
-    "engines": {
-        "node": ">=18",
-        "pnpm": ">=7.9.0"
-    },
-    "publishConfig": {
-        "access": "restricted"
-    }
+	"name": "@bearmint/bep-053",
+	"version": "0.0.0",
+	"private": true,
+	"description": "This library is the official reference implementation for BEP-053 (https://bep.dev/053)",
+	"keywords": [
+		"bearmint",
+		"tendermint",
+		"blockchain",
+		"framework",
+		"modular"
+	],
+	"homepage": "https://github.com/bearmint/bearmint",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bearmint/bearmint.git"
+	},
+	"funding": "https://funding.bearmint.com/",
+	"license": "MIT",
+	"author": "Bearmint Mining Company <hello@bearmint.com> (https://bearmint.com/)",
+	"type": "module",
+	"exports": "./distribution/index.js",
+	"types": "./distribution/index.d.ts",
+	"files": [
+		"distribution"
+	],
+	"scripts": {
+		"audit": "pnpm audit --fix --prod",
+		"build": "pnpm run clean && tsc",
+		"build:watch": "pnpm run clean && tsc -w",
+		"clean": "rm -rf distribution",
+		"depcheck": "depcheck --ignores=@bearmint/bep-004,@bearmint/bep-005,@bearmint/bep-031,@bearmint/bep-039",
+		"deps:major": "ncu -u --target=latest",
+		"deps:minor": "ncu -u --target=minor",
+		"deps:patch": "ncu -u --target=patch",
+		"docs": "typedoc source",
+		"knip": "knip",
+		"lint": "eslint 'source/**/*.ts' --format=codeframe --config=../../config/eslintrc.js --fix"
+	},
+	"dependencies": {
+		"@bearmint/bep-005": "workspace:^",
+		"@bearmint/bep-006": "workspace:^",
+		"@bearmint/bep-008": "workspace:^",
+		"@bearmint/bep-009": "workspace:^",
+		"@bearmint/bep-013": "workspace:^",
+		"@bearmint/bep-014": "workspace:^",
+		"@bearmint/bep-015": "workspace:^",
+		"@bearmint/bep-016": "workspace:^",
+		"@bearmint/bep-018": "workspace:^",
+		"@bearmint/bep-020": "workspace:^",
+		"@bearmint/bep-022": "workspace:^",
+		"@bearmint/bep-023": "workspace:^",
+		"@bearmint/bep-030": "workspace:^",
+		"@bearmint/bep-033": "workspace:^",
+		"@bearmint/bep-034": "workspace:^",
+		"@bearmint/bep-035": "workspace:^",
+		"@bearmint/bep-038": "workspace:^",
+		"@bearmint/bep-042": "workspace:^",
+		"@bearmint/bep-048": "workspace:^",
+		"@bearmint/bep-049": "workspace:^",
+		"@bearmint/bep-050": "workspace:^",
+		"@bearmint/bep-051": "workspace:^",
+		"@bearmint/bep-084": "workspace:^",
+		"@bearmint/bep-085": "workspace:^",
+		"@bearmint/bep-086": "workspace:^",
+		"@bearmint/bep-087": "workspace:^",
+		"@bearmint/bep-088": "workspace:^",
+		"@bearmint/bep-090": "workspace:^",
+		"@bearmint/bep-099": "workspace:^",
+		"@bearmint/bep-109": "workspace:^",
+		"@bearmint/bep-146": "workspace:^",
+		"@scure/bip39": "1.1.0"
+	},
+	"engines": {
+		"node": ">=18",
+		"pnpm": ">=7.9.0"
+	},
+	"publishConfig": {
+		"access": "restricted"
+	}
 }

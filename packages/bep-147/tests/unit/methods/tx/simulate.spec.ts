@@ -28,7 +28,7 @@ describe<{ state: StateStore }>('SimulateTx', () => {
 				// @ts-ignore
 				AccountSerializer: makeAccountSerializer({
 					AddressFactory: fakeAddressFactory(),
-					DeliverTxState: fakeCommittedState(),
+					ExecuteTxState: fakeCommittedState(),
 					EventDispatcher: fakeEventDispatcher(),
 				}),
 				AddressFactory: fakeAddressFactory(),

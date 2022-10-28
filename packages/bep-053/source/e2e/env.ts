@@ -99,7 +99,7 @@ export async function createEnvironment(
 	await container.build(BEP20.makeServiceProvider).register()
 
 	// Fake state stores
-	container.bindValue(ContainerType.DeliverTxState, container.resolve(ContainerType.CommittedState))
+	container.bindValue(ContainerType.ExecuteTxState, container.resolve(ContainerType.CommittedState))
 
 	// Few quick access values that are used a lot
 	await container.resolve<StateStore>(ContainerType.CommittedState).setMilestone(milestone as any)

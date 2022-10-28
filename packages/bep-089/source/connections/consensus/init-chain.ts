@@ -4,7 +4,7 @@ import { Event } from '@bearmint/bep-013'
 import type { abci } from '@bearmint/bep-018'
 import { getPublicKeyType, setMilestone } from '@bearmint/bep-021'
 
-import { canonicalizeValidatorUpdates, setCheckTxState, setDeliverTxState } from './utils.js'
+import { canonicalizeValidatorUpdates, setCheckTxState, setExecuteTxState } from './utils.js'
 
 /**
  * @remarks
@@ -83,7 +83,7 @@ export function makeInitChain(
 			/* eslint-enable sort-keys-fix/sort-keys-fix */
 
 			setCheckTxState(cradle.Container, await cradle.CommittedState.copy())
-			setDeliverTxState(cradle.Container, await cradle.CommittedState.copy())
+			setExecuteTxState(cradle.Container, await cradle.CommittedState.copy())
 
 			return {
 				appHash: hexToBytes(cradle.GenesisParameters.app_hash),

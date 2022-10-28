@@ -28,7 +28,7 @@ describe('Commit', () => {
 				CheckTxState: await CommittedState.copy(),
 				Container: makeContainer(),
 				DataSink: { put() {} },
-				DeliverTxState: await CommittedState.copy(),
+				ExecuteTxState: await CommittedState.copy(),
 				CommittedState,
 				GenesisParameters: {},
 				Milestones: config.milestones,

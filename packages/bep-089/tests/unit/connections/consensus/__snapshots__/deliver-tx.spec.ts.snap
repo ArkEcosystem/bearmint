@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`DeliverTx > it should respond without any errors 1`] = `
+exports[`ExecuteTx > it should respond without any errors 1`] = `
 {
   "code": 0,
   "data": {

@@ -7,8 +7,8 @@ export function setCheckTxState(container: Container, state: StateStore) {
 	container.bindValue(ContainerType.CheckTxState, state)
 }
 
-export function setDeliverTxState(container: Container, state: StateStore) {
-	container.bindValue(ContainerType.DeliverTxState, state)
+export function setExecuteTxState(container: Container, state: StateStore) {
+	container.bindValue(ContainerType.ExecuteTxState, state)
 }
 
 export function canonicalizeValidatorUpdates({
@@ -46,11 +46,11 @@ export async function resetState(cradle: Cradle) {
 	await cradle.CommittedState.checkpoint()
 
 	setCheckTxState(cradle.Container, await cradle.CommittedState.copy())
-	setDeliverTxState(cradle.Container, await cradle.CommittedState.copy())
+	setExecuteTxState(cradle.Container, await cradle.CommittedState.copy())
 
 	// Anchor Checkpoint to allow for reverts/commits per tx
 	await cradle.CheckTxState.checkpoint()
 
 	// Anchor Checkpoint to allow for reverts/commits per tx
-	await cradle.DeliverTxState.checkpoint()
+	await cradle.ExecuteTxState.checkpoint()
 }

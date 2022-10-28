@@ -13,8 +13,8 @@ import { abci } from '@bearmint/bep-018'
 describe('EndBlock', () => {
 	it('it should respond without any errors', async () => {
 		const CommittedState = await fakeStateStore()
-		const DeliverTxState = await CommittedState.copy()
-		DeliverTxState.setCandidateBlock(
+		const ExecuteTxState = await CommittedState.copy()
+		ExecuteTxState.setCandidateBlock(
 			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
 		)
 
@@ -31,7 +31,7 @@ describe('EndBlock', () => {
 			await makeEndBlock({
 				Container,
 				DataSink: { put() {} },
-				DeliverTxState,
+				ExecuteTxState,
 				EventDispatcher: { dispatch() {} },
 				MilestoneStrategy: Container.build(BEP115),
 				Milestones: {

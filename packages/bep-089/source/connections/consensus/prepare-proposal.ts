@@ -7,7 +7,7 @@ import type { abci } from '@bearmint/bep-018'
 export function makePrepareProposal(): ABCIController<
 	abci.RequestPrepareProposal,
 	abci.ResponsePrepareProposal
-> {
+	> {
 	return {
 		async execute(request) {
 			const txs: Uint8Array[] = []

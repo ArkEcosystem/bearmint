@@ -12,7 +12,7 @@ import { milestone } from '@bearmint/bep-006'
 describe('InitChain', () => {
 	it('it should respond without any errors', async () => {
 		const CommittedState = await fakeStateStore()
-		const DeliverTxState = await CommittedState.copy()
+		const ExecuteTxState = await CommittedState.copy()
 
 		await CommittedState.checkpoint()
 
@@ -31,7 +31,7 @@ describe('InitChain', () => {
 					validatorUpdates: validatorUpdates.toFunction(),
 				},
 				Container: makeContainer(),
-				DeliverTxState,
+				ExecuteTxState,
 				EventDispatcher: {
 					dispatch() {
 						//

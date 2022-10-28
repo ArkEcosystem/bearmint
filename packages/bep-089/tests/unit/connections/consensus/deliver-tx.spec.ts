@@ -9,26 +9,26 @@ import { TxFailuresRecordedException } from '@bearmint/bep-109'
 import { makeGasMeterFactory } from '@bearmint/bep-048'
 
 import { fakeStateStore } from '../../../state.js'
-import { makeDeliverTx } from '../../../../source/connections/consensus/deliver-tx.js'
+import { makeExecuteTx } from '../../../../source/connections/consensus/deliver-tx.js'
 import { abci } from '@bearmint/bep-018'
 
-describe('DeliverTx', () => {
+describe('ExecuteTx', () => {
 	it('it should respond without any errors', async () => {
-		const DeliverTxState = await fakeStateStore()
-		DeliverTxState.setCandidateBlock(
+		const ExecuteTxState = await fakeStateStore()
+		ExecuteTxState.setCandidateBlock(
 			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
 		)
-		await DeliverTxState.setCommittedBlock(
+		await ExecuteTxState.setCommittedBlock(
 			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
 		)
 
 		const TxProcessor = spyFn()
 
 		expect(
-			await makeDeliverTx({
+			await makeExecuteTx({
 				Container: makeContainer(),
 				DataSink: { put() {} },
-				DeliverTxState,
+				ExecuteTxState,
 				EventDispatcher: makeEventDispatcher(),
 				EventRecorderFactory: makeEventRecorderFactory(),
 				GasCalculator: {
@@ -81,16 +81,16 @@ describe('DeliverTx', () => {
 	})
 
 	it('it should respond after handling an unexpected error', async () => {
-		const DeliverTxState = await fakeStateStore()
+		const ExecuteTxState = await fakeStateStore()
 
 		const TxProcessor = spyFn()
 		const TxAuditorRegistry = spyFn()
-		const revert = spy(DeliverTxState, 'revert')
+		const revert = spy(ExecuteTxState, 'revert')
 
 		expect(
-			await makeDeliverTx({
+			await makeExecuteTx({
 				Container: makeContainer(),
-				DeliverTxState,
+				ExecuteTxState,
 				EventDispatcher: makeEventDispatcher(),
 				EventRecorderFactory: makeEventRecorderFactory(),
 				GasCalculator: {
@@ -135,16 +135,16 @@ describe('DeliverTx', () => {
 	})
 
 	it('it should respond after handling TxFailuresRecordedException', async () => {
-		const DeliverTxState = await fakeStateStore()
+		const ExecuteTxState = await fakeStateStore()
 
 		const TxProcessor = spyFn()
 		const TxAuditorRegistry = spyFn()
-		const revert = spy(DeliverTxState, 'revert')
+		const revert = spy(ExecuteTxState, 'revert')
 
 		expect(
-			await makeDeliverTx({
+			await makeExecuteTx({
 				Container: makeContainer(),
-				DeliverTxState,
+				ExecuteTxState,
 				EventDispatcher: makeEventDispatcher(),
 				EventRecorderFactory: makeEventRecorderFactory(),
 				GasCalculator: {

@@ -22,19 +22,19 @@ describe('BeginBlock', () => {
 				},
 			}),
 		)
-		const DeliverTxState = await CommittedState.copy()
+		const ExecuteTxState = await CommittedState.copy()
 
 		expect(
 			await makeBeginBlock({
 				Consensus: {},
 				Container: makeContainer(),
-				CheckTxState: DeliverTxState,
+				CheckTxState: ExecuteTxState,
 				DelegatorRewarder: {
 					execute() {
 						return ['delegator']
 					},
 				},
-				DeliverTxState,
+				ExecuteTxState,
 				Logger: console,
 				MilestoneStrategy: BEP115(),
 				CommittedState,
@@ -55,10 +55,10 @@ describe('BeginBlock', () => {
 			),
 		).toStrictEqual({ events: [] })
 
-		expect(bytesToHex(await DeliverTxState.getCommittedBlockAppHash())).toStrictEqual(
+		expect(bytesToHex(await ExecuteTxState.getCommittedBlockAppHash())).toStrictEqual(
 			'56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421',
 		)
-		expect(bytesToHex(DeliverTxState.getCandidateBlockProposer())).toStrictEqual(
+		expect(bytesToHex(ExecuteTxState.getCandidateBlockProposer())).toStrictEqual(
 			'70726f706f73657241646472657373',
 		)
 	})

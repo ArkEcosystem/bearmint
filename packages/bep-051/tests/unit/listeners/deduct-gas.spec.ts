@@ -26,7 +26,7 @@ describe<{
 }>('Deduct Gas Listener', () => {
 	beforeEach(async (context) => {
 		const container = makeContainer()
-		container.bindValue(ContainerType.DeliverTxState, fakeCommittedState())
+		container.bindValue(ContainerType.ExecuteTxState, fakeCommittedState())
 
 		context.eventRecorder = makeEventRecorder()
 

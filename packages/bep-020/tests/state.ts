@@ -8,7 +8,7 @@ import { denominations } from './fixtures.js'
 
 export async function fakeStateStore() {
 	const container = makeContainer()
-	container.bindValue(ContainerType.DeliverTxState, {
+	container.bindValue(ContainerType.ExecuteTxState, {
 		getCommittedBlockAppHash() {
 			return Buffer.from('deadbeef')
 		},

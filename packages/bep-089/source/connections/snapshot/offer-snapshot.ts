@@ -4,7 +4,7 @@ import { abci } from '@bearmint/bep-018'
 export function makeOfferSnapshot(): ABCIController<
 	abci.RequestOfferSnapshot,
 	abci.ResponseOfferSnapshot
-> {
+	> {
 	return {
 		async execute(_request) {
 			return {

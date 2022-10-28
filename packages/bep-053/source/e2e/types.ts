@@ -24,7 +24,7 @@ export interface CheckTx {
 	mempoolError: string
 }
 
-export interface DeliverTx {
+export interface ExecuteTx {
 	code: number
 	data: string
 	log: string
@@ -37,7 +37,7 @@ export interface DeliverTx {
 
 export interface BroadcastTxResponse {
 	check_tx: CheckTx
-	deliver_tx: DeliverTx
+	deliver_tx: ExecuteTx
 	hash: string
 	height: string
 }

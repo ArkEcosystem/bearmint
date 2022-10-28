@@ -17,7 +17,7 @@ export function makeCommit(
 ): ABCIController<abci.RequestCommit, abci.ResponseCommit> {
 	return {
 		async execute(_request) {
-			const { height, root } = await cradle.CommittedState.commit(cradle.DeliverTxState)
+			const { height, root } = await cradle.CommittedState.commit(cradle.ExecuteTxState)
 
 			// We reset here because `CheckTx` will be called next if there are pending txs.
 			await resetState(cradle)

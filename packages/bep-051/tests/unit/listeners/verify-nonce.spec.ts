@@ -25,7 +25,7 @@ describe<{
 }>('Validate Nonce Listener', () => {
 	beforeEach(async (context) => {
 		const container = makeContainer()
-		container.bindValue(ContainerType.DeliverTxState, fakeCommittedState())
+		container.bindValue(ContainerType.ExecuteTxState, fakeCommittedState())
 
 		context.eventRecorder = makeEventRecorder()
 
@@ -47,7 +47,7 @@ describe<{
 		await context.state.getAccountRepository().index([
 			await makeAccountSerializer({
 				CommittedState: context.state,
-				DeliverTxState: context.state,
+				ExecuteTxState: context.state,
 				EventDispatcher: makeEventDispatcher(),
 			}).deserialize({
 				address: 'bear1zd9renpnx5r30f7m0x5nk4gkag996nds5c8s8gyrxhsvfjt4690qxdkwq3',
@@ -80,7 +80,7 @@ describe<{
 		await context.state.getAccountRepository().index([
 			await makeAccountSerializer({
 				CommittedState: context.state,
-				DeliverTxState: context.state,
+				ExecuteTxState: context.state,
 				EventDispatcher: makeEventDispatcher(),
 			}).deserialize({
 				address: 'bear1zd9renpnx5r30f7m0x5nk4gkag996nds5c8s8gyrxhsvfjt4690qxdkwq3',

@@ -7,7 +7,7 @@ import { abci } from '@bearmint/bep-018'
 export function makeProcessProposal(): ABCIController<
 	abci.RequestProcessProposal,
 	abci.ResponseProcessProposal
-> {
+	> {
 	return {
 		async execute(request) {
 			for (const tx of request.txs) {
@@ -18,13 +18,13 @@ export function makeProcessProposal(): ABCIController<
 				}
 			}
 
-			// TODO: The Application may fully execute the block as though it was handling the calls to BeginBlock-DeliverTx-EndBlock.
+			// TODO: The Application may fully execute the block as though it was handling the calls to BeginBlock-ExecuteTx-EndBlock.
 			// TODO: However, any resulting state changes must be kept as candidate state, and the Application should be ready to discard it in case another block is decided.
 
 			// this.#beginBlock(request)
 
 			// for (const tx of request.txs) {
-			// 	this.#deliverTx(request, tx)
+			// 	this.#executeTx(request, tx)
 			// }
 
 			// this.#endBlock(request)

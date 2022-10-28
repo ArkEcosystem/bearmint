@@ -6,7 +6,7 @@ import { ContainerType } from '@bearmint/bep-013'
 
 import {
 	setCheckTxState,
-	setDeliverTxState,
+	setExecuteTxState,
 } from '../../../../source/connections/consensus/utils.js'
 
 describe('Utils', () => {
@@ -20,13 +20,13 @@ describe('Utils', () => {
 		expect(container.has(ContainerType.CheckTxState)).toBeTrue()
 	})
 
-	it('should set the DeliverTx state', async () => {
+	it('should set the ExecuteTx state', async () => {
 		const container = makeContainer()
 
-		expect(container.has(ContainerType.DeliverTxState)).toBeFalse()
+		expect(container.has(ContainerType.ExecuteTxState)).toBeFalse()
 
-		setDeliverTxState(container, 'state')
+		setExecuteTxState(container, 'state')
 
-		expect(container.has(ContainerType.DeliverTxState)).toBeTrue()
+		expect(container.has(ContainerType.ExecuteTxState)).toBeTrue()
 	})
 })

@@ -66,7 +66,7 @@ export function makeCheckTx(
 					data: tx.bytes,
 					events,
 					gasUsed: BigInt('0'),
-					gasWanted: (await cradle.GasCalculator.execute(cradle.DeliverTxState, tx)).expected,
+					gasWanted: (await cradle.GasCalculator.execute(cradle.ExecuteTxState, tx)).expected,
 					priority: await cradle.TxPrioritizer.execute(tx),
 					sender: tx.data.sender.toString(),
 				}
@@ -94,7 +94,7 @@ export function makeCheckTx(
 					data: tx.bytes,
 					events,
 					gasUsed: BigInt('0'),
-					gasWanted: (await cradle.GasCalculator.execute(cradle.DeliverTxState, tx)).expected,
+					gasWanted: (await cradle.GasCalculator.execute(cradle.ExecuteTxState, tx)).expected,
 					mempoolError: error.message,
 					sender: tx.data.sender.toString(),
 				}

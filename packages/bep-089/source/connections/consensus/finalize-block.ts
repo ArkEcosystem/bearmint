@@ -77,32 +77,32 @@ async function beginBlock(cradle: Cradle, request: abci.RequestFinalizeBlock) {
 		cradle.Container.has(ContainerType.ValidatorRewarder)
 	) {
 		// TODO: When ABCI++ lands we should store the proposer address separately
-		if (!cradle.DeliverTxState.hasCandidateBlock()) {
-			cradle.DeliverTxState.setCandidateBlock(await cradle.DeliverTxState.getCommittedBlock())
+		if (!cradle.ExecuteTxState.hasCandidateBlock()) {
+			cradle.ExecuteTxState.setCandidateBlock(await cradle.ExecuteTxState.getCommittedBlock())
 		}
 
-		const validator = await cradle.ValidatorRewarder.execute(cradle.DeliverTxState)
+		const validator = await cradle.ValidatorRewarder.execute(cradle.ExecuteTxState)
 
 		events = validator.events
 
 		if (cradle.Container.has(ContainerType.DelegatorRewarder)) {
 			events = [
 				...events,
-				...(await cradle.DelegatorRewarder.execute(cradle.DeliverTxState, validator.reward)),
+				...(await cradle.DelegatorRewarder.execute(cradle.ExecuteTxState, validator.reward)),
 			]
 		}
 	}
 
 	// Set new candidate block after we paid rewards.
-	cradle.DeliverTxState.setCandidateBlock(request)
+	cradle.ExecuteTxState.setCandidateBlock(request)
 
 	if (Array.isArray(request.misbehaviors)) {
 		if (cradle.Container.has(ContainerType.ValidatorSlasher)) {
-			await cradle.ValidatorSlasher.execute(cradle.DeliverTxState, request.misbehaviors)
+			await cradle.ValidatorSlasher.execute(cradle.ExecuteTxState, request.misbehaviors)
 		}
 
 		if (cradle.Container.has(ContainerType.DelegatorSlasher)) {
-			await cradle.DelegatorSlasher.execute(cradle.DeliverTxState, request.misbehaviors)
+			await cradle.DelegatorSlasher.execute(cradle.ExecuteTxState, request.misbehaviors)
 		}
 	}
 
@@ -116,7 +116,7 @@ async function beginBlock(cradle: Cradle, request: abci.RequestFinalizeBlock) {
  * @see https://github.com/tendermint/tendermint/blob/v0.34.x/spec/abci/apps.md#delivertx
  * @see https://github.com/tendermint/tendermint/blob/v0.34.x/spec/abci/abci.md#delivertx-2
  */
-async function deliverTx(cradle: Cradle, data: Uint8Array) {
+async function executeTx(cradle: Cradle, data: Uint8Array) {
 	let tx: Tx
 
 	try {
@@ -135,21 +135,21 @@ async function deliverTx(cradle: Cradle, data: Uint8Array) {
 	}
 
 	try {
-		await cradle.DeliverTxState.checkpoint()
+		await cradle.ExecuteTxState.checkpoint()
 
 		const gasMeter = cradle.GasMeterFactory.make()
 
 		const { events, receipt } = await cradle.TxProcessor.execute(
 			cradle.EventRecorderFactory.make(),
 			gasMeter,
-			cradle.DeliverTxState,
+			cradle.ExecuteTxState,
 			tx,
 		)
 
-		cradle.DeliverTxState.setConsumedGas(cradle.DeliverTxState.getConsumedGas() + gasMeter.total())
+		cradle.ExecuteTxState.setConsumedGas(cradle.ExecuteTxState.getConsumedGas() + gasMeter.total())
 
-		await cradle.DeliverTxState.getTxStore().set(tx.hash, tx.bytes)
-		await cradle.DeliverTxState.getTxReceiptStore().set(tx.hash, receipt.toBinary())
+		await cradle.ExecuteTxState.getTxStore().set(tx.hash, tx.bytes)
+		await cradle.ExecuteTxState.getTxReceiptStore().set(tx.hash, receipt.toBinary())
 
 		// Send all receipt logs to the data sink
 		receiptToDataSink(tx, receipt, cradle.DataSink)
@@ -164,17 +164,17 @@ async function deliverTx(cradle: Cradle, data: Uint8Array) {
 		})
 		/* eslint-enable sort-keys-fix/sort-keys-fix */
 
-		await cradle.DeliverTxState.commit()
+		await cradle.ExecuteTxState.commit()
 
 		return {
 			code: 0,
 			data: tx.bytes,
 			events,
 			gasUsed: tx.data.gas,
-			gasWanted: (await cradle.GasCalculator.execute(cradle.DeliverTxState, tx)).expected,
+			gasWanted: (await cradle.GasCalculator.execute(cradle.ExecuteTxState, tx)).expected,
 		}
 	} catch (error) {
-		await cradle.DeliverTxState.revert()
+		await cradle.ExecuteTxState.revert()
 
 		/* eslint-disable sort-keys-fix/sort-keys-fix */
 		cradle.Logger.debug('%s', {
@@ -197,7 +197,7 @@ async function deliverTx(cradle: Cradle, data: Uint8Array) {
 			data: tx.bytes,
 			events,
 			gasUsed: BigInt('0'),
-			gasWanted: (await cradle.GasCalculator.execute(cradle.DeliverTxState, tx)).expected,
+			gasWanted: (await cradle.GasCalculator.execute(cradle.ExecuteTxState, tx)).expected,
 			info: error.message,
 		}
 	}
@@ -212,22 +212,22 @@ async function endBlock(cradle: Cradle, request: abci.RequestFinalizeBlock) {
 	assert.defined<bigint>(request.height)
 
 	const consensusParameterUpdates = (
-		await setMilestone(cradle, cradle.DeliverTxState, request.height)
+		await setMilestone(cradle, cradle.ExecuteTxState, request.height)
 	).parameters.consensus
 
 	const validatorUpdates = canonicalizeValidatorUpdates({
-		type: getPublicKeyType(cradle.DeliverTxState.getMilestone()),
-		validators: await cradle.ValidatorElector.elect(cradle.DeliverTxState),
+		type: getPublicKeyType(cradle.ExecuteTxState.getMilestone()),
+		validators: await cradle.ValidatorElector.elect(cradle.ExecuteTxState),
 	})
 
 	cradle.DataSink.put(
 		'@bearmint/bep-089',
 		{
-			id: cradle.DeliverTxState.getCandidateBlockNumber().toString(),
+			id: cradle.ExecuteTxState.getCandidateBlockNumber().toString(),
 			type: 'validator_updates',
 		},
 		{
-			blockNumber: cradle.DeliverTxState.getCandidateBlockNumber(),
+			blockNumber: cradle.ExecuteTxState.getCandidateBlockNumber(),
 			value: canonicalizeJson(validatorUpdates.map((u) => u.toJson())),
 		},
 	)
@@ -255,14 +255,14 @@ export function makeFinalizeBlock(
 				}
 			}
 
-			// TODO: The Application may fully execute the block as though it was handling the calls to BeginBlock-DeliverTx-EndBlock.
+			// TODO: The Application may fully execute the block as though it was handling the calls to BeginBlock-ExecuteTx-EndBlock.
 			// TODO: However, any resulting state changes must be kept as candidate state, and the Application should be ready to discard it in case another block is decided.
 
 			const beginBlockResult = await beginBlock(cradle, request)
 
 			const txResults: abci.ExecTxResult[] = []
 			for (const tx of request.txs) {
-				await deliverTx(cradle, tx)
+				await executeTx(cradle, tx)
 			}
 
 			const endBlockResult = await endBlock(cradle, request)
@@ -277,7 +277,7 @@ export function makeFinalizeBlock(
 				 * (written to disk) any state changes. The new value is the
 				 * world trie root of the candidate state before we commit.
 				 */
-				agreedAppData: cradle.DeliverTxState.getAppHash(),
+				agreedAppData: cradle.ExecuteTxState.getAppHash(),
 				consensusParamUpdates: endBlockResult.consensusParamUpdates,
 				events: [...beginBlockResult.events, ...endBlockResult.events],
 				txResults,

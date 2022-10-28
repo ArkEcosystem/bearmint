@@ -30,7 +30,7 @@ export async function fakeStateStore(context: TxTestContext) {
 		},
 	})
 
-	context.container.bindValue(ContainerType.DeliverTxState, {
+	context.container.bindValue(ContainerType.ExecuteTxState, {
 		getCommittedBlockAppHashpHash() {
 			return Buffer.from('deadbeef')
 		},

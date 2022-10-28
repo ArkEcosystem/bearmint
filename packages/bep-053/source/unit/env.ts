@@ -146,7 +146,7 @@ export async function createEnvironment(
 		},
 	})
 
-	context.container.bindValue(ContainerType.DeliverTxState, {
+	context.container.bindValue(ContainerType.ExecuteTxState, {
 		getCommittedBlockAppHashpHash() {
 			return Buffer.from('deadbeef')
 		},
@@ -163,7 +163,7 @@ export async function createEnvironment(
 
 	// Fake state stores
 	context.container.bindValue(ContainerType.CommittedState, context.state)
-	context.container.bindValue(ContainerType.DeliverTxState, context.state)
+	context.container.bindValue(ContainerType.ExecuteTxState, context.state)
 
 	// PoS and Staking Service
 	await context.container.build(BEP88.makeServiceProvider).register()

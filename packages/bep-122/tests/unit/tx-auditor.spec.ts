@@ -68,7 +68,7 @@ describe<TxTestContext>('Tx Auditor', () => {
 		const { tx } = await createTx(context, { jailedUntil: '10' })
 
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(1) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
 		)
 
 		await expect(await context.audit(tx)).toFailAudit([
@@ -83,7 +83,7 @@ describe<TxTestContext>('Tx Auditor', () => {
 		const { tx } = await createTx(context)
 
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(10) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(10) } }),
 		)
 
 		await expect(await context.execute(tx)).toPassAudit()
@@ -96,7 +96,7 @@ describe<TxTestContext>('Tx Auditor', () => {
 		})
 
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(100) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(100) } }),
 		)
 
 		await expect(await context.audit(tx)).toFailAudit([

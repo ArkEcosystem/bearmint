@@ -13,7 +13,7 @@ describe('BeginBlock', () => {
 	it('it should respond without any errors', async () => {
 		const CommittedState = await fakeStateStore()
 		await CommittedState.setCommittedBlock(
-			new abci.RequestBeginBlock({
+			new abci.RequestFinalizeBlock({
 				header: {
 					appHash: Buffer.from(
 						'56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421',
@@ -44,7 +44,7 @@ describe('BeginBlock', () => {
 					},
 				},
 			}).execute(
-				new abci.RequestBeginBlock({
+				new abci.RequestFinalizeBlock({
 					byzantineValidators: [],
 					header: {
 						appHash: Buffer.from('hello'),

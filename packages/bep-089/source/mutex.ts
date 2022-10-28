@@ -8,12 +8,9 @@ const MUTEX_SNAPSHOT = new Semaphore(1)
 
 export const MUTEXES = {
 	applySnapshotChunk: MUTEX_SNAPSHOT,
-	beginBlock: MUTEX_CONSENSUS,
 	checkTx: MUTEX_MEMPOOL,
 	commit: MUTEX_CONSENSUS,
-	deliverTx: MUTEX_CONSENSUS,
 	echo: MUTEX_GENERAL,
-	endBlock: MUTEX_CONSENSUS,
 	extendVote: MUTEX_CONSENSUS,
 	finalizeBlock: MUTEX_CONSENSUS,
 	flush: MUTEX_GENERAL,

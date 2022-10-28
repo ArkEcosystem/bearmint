@@ -36,16 +36,16 @@ export interface StateStore {
 
 	// A candidate block is a block that has not yet reached consensus
 	hasCandidateBlock(): boolean
-	getCandidateBlock(): abci.RequestBeginBlock
-	setCandidateBlock(proposedBlock: abci.RequestBeginBlock): void
+	getCandidateBlock(): abci.RequestFinalizeBlock
+	setCandidateBlock(proposedBlock: abci.RequestFinalizeBlock): void
 	getCandidateBlockHash(): Uint8Array
 	getCandidateBlockNumber(): bigint
 	getCandidateBlockProposer(): Uint8Array
 
 	// A committed block is a block that has reached consensus and has been persisted
 	getCommittedBlockNumber(): Promise<bigint>
-	getCommittedBlock(): Promise<abci.RequestBeginBlock>
-	setCommittedBlock(block: abci.RequestBeginBlock): Promise<void>
+	getCommittedBlock(): Promise<abci.RequestFinalizeBlock>
+	setCommittedBlock(block: abci.RequestFinalizeBlock): Promise<void>
 	getCommittedBlockAppHash(): Promise<Uint8Array>
 }
 

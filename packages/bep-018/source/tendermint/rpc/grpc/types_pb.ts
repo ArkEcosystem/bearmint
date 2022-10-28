@@ -5,7 +5,7 @@
 
 import type {BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage} from "@bufbuild/protobuf";
 import {Message, proto3} from "@bufbuild/protobuf";
-import {ResponseCheckTx, ResponseDeliverTx} from "../../abci/types_pb.js";
+import {ExecTxResult, ResponseCheckTx} from "../../abci/types_pb.js";
 
 /**
  * @generated from message tendermint.rpc.grpc.RequestPing
@@ -116,9 +116,9 @@ export class ResponseBroadcastTx extends Message<ResponseBroadcastTx> {
   checkTx?: ResponseCheckTx;
 
   /**
-   * @generated from field: tendermint.abci.ResponseDeliverTx deliver_tx = 2;
+   * @generated from field: tendermint.abci.ExecTxResult tx_result = 2;
    */
-  deliverTx?: ResponseDeliverTx;
+  txResult?: ExecTxResult;
 
   constructor(data?: PartialMessage<ResponseBroadcastTx>) {
     super();
@@ -129,7 +129,7 @@ export class ResponseBroadcastTx extends Message<ResponseBroadcastTx> {
   static readonly typeName = "tendermint.rpc.grpc.ResponseBroadcastTx";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "check_tx", kind: "message", T: ResponseCheckTx },
-    { no: 2, name: "deliver_tx", kind: "message", T: ResponseDeliverTx },
+    { no: 2, name: "tx_result", kind: "message", T: ExecTxResult },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ResponseBroadcastTx {

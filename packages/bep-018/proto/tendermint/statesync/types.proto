@@ -1,5 +1,4 @@
 syntax = "proto3";
-
 package tendermint.statesync;
 
 option go_package = "github.com/tendermint/tendermint/proto/tendermint/statesync";

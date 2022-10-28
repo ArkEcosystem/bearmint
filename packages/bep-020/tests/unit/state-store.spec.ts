@@ -51,7 +51,7 @@ describe<{
 
 	it('should get the last block app hash', async (context) => {
 		await context.subject.setCommittedBlock(
-			new abci.RequestBeginBlock({
+			new abci.RequestFinalizeBlock({
 				header: {
 					appHash: Buffer.from(
 						'56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421',
@@ -69,7 +69,7 @@ describe<{
 
 	it('should get the last block height', async (context) => {
 		await context.subject.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(1) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
 		)
 
 		expect((await context.subject.getCommittedBlockNumber()).toString()).toStrictEqual('1')
@@ -113,7 +113,7 @@ describe<{
 
 	it('should copy the state store', async (context) => {
 		await context.subject.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(1) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
 		)
 		await context.subject.setMilestone({
 			blockNumber: '1',
@@ -155,12 +155,12 @@ describe<{
 		await context.subject.checkpoint()
 
 		context.subject.setCandidateBlock(
-			new abci.RequestBeginBlock({
+			new abci.RequestFinalizeBlock({
 				header: { height: BigInt(2), proposerAddress: Buffer.alloc(0) },
 			}),
 		)
 		await context.subject.setCommittedBlock(
-			new abci.RequestBeginBlock({
+			new abci.RequestFinalizeBlock({
 				header: {
 					appHash: Buffer.from(
 						'd3db1ad667c6189ca5e5164edf897fbb62ce15847b436d2c2cc363fefa866133',
@@ -200,7 +200,7 @@ describe<{
 		await context.subject.checkpoint()
 
 		context.subject.setCandidateBlock(
-			new abci.RequestBeginBlock({
+			new abci.RequestFinalizeBlock({
 				header: {
 					appHash: Buffer.from(
 						'd3db1ad667c6189ca5e5164edf897fbb62ce15847b436d2c2cc363fefa866133',
@@ -211,7 +211,7 @@ describe<{
 			}),
 		)
 		await context.subject.setCommittedBlock(
-			new abci.RequestBeginBlock({
+			new abci.RequestFinalizeBlock({
 				header: {
 					appHash: Buffer.from(
 						'd3db1ad667c6189ca5e5164edf897fbb62ce15847b436d2c2cc363fefa866133',
@@ -230,9 +230,11 @@ describe<{
 	it('should restore trie state', async (context) => {
 		await context.subject.checkpoint()
 
-		context.subject.setCandidateBlock(new abci.RequestBeginBlock({ header: { height: BigInt(1) } }))
+		context.subject.setCandidateBlock(
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
+		)
 		await context.subject.setCommittedBlock(
-			new abci.RequestBeginBlock({
+			new abci.RequestFinalizeBlock({
 				header: {
 					appHash: Buffer.from(
 						'd3db1ad667c6189ca5e5164edf897fbb62ce15847b436d2c2cc363fefa866133',

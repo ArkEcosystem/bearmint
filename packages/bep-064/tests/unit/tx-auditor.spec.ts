@@ -14,7 +14,7 @@ describe<TxTestContext>('Tx Auditor', () => {
 
 	it('should fail if the expiration is in the past', async (context) => {
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(10) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(10) } }),
 		)
 
 		const { tx } = await createTx(context, {
@@ -31,7 +31,7 @@ describe<TxTestContext>('Tx Auditor', () => {
 
 	it('should fail if the expiration is in the present', async (context) => {
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(10) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(10) } }),
 		)
 
 		const { tx } = await createTx(context, {
@@ -48,7 +48,7 @@ describe<TxTestContext>('Tx Auditor', () => {
 
 	it('should fail if the secret is junk', async (context) => {
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(10) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(10) } }),
 		)
 
 		const { tx } = await createTx(context, {
@@ -79,7 +79,7 @@ describe<TxTestContext>('Tx Auditor', () => {
 
 	it('should fail if the beneficiary is also the sender', async (context) => {
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(10) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(10) } }),
 		)
 
 		const { tx } = await createTx(context, {

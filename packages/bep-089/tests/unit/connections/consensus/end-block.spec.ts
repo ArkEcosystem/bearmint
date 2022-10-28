@@ -14,7 +14,9 @@ describe('EndBlock', () => {
 	it('it should respond without any errors', async () => {
 		const CommittedState = await fakeStateStore()
 		const DeliverTxState = await CommittedState.copy()
-		DeliverTxState.setCandidateBlock(new abci.RequestBeginBlock({ header: { height: BigInt(1) } }))
+		DeliverTxState.setCandidateBlock(
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
+		)
 
 		await CommittedState.checkpoint()
 

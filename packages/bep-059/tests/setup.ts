@@ -57,7 +57,9 @@ export function setUp(beforeEach: CallableFunction) {
 		await context.state.getMultiStore().add('@bearmint/bep-059')
 
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock(new abci.RequestBeginBlock({ header: { height: BigInt(10) } })),
+			new abci.RequestFinalizeBlock(
+				new abci.RequestFinalizeBlock({ header: { height: BigInt(10) } }),
+			),
 		)
 	})
 }

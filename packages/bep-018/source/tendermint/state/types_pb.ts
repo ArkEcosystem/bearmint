@@ -5,62 +5,153 @@
 
 import type {BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage} from "@bufbuild/protobuf";
 import {Message, proto3, protoInt64, Timestamp} from "@bufbuild/protobuf";
-import {ResponseBeginBlock, ResponseDeliverTx, ResponseEndBlock} from "../abci/types_pb.js";
-import {ValidatorSet} from "../types/validator_pb.js";
+import {Event, ExecTxResult, ResponseFinalizeBlock, ValidatorUpdate} from "../abci/types_pb.js";
 import {ConsensusParams} from "../types/params_pb.js";
+import {ValidatorSet} from "../types/validator_pb.js";
 import {Consensus} from "../version/types_pb.js";
 import {BlockID} from "../types/types_pb.js";
 
 /**
- * ABCIResponses retains the responses
- * of the various ABCI calls during block processing.
- * It is persisted to disk for each height before calling Commit.
+ * LegacyABCIResponses retains the responses
+ * of the legacy ABCI calls during block processing.
+ * Note ReponseDeliverTx is renamed to ExecTxResult but they are semantically the same
+ * Kept for backwards compatibility for versions prior to v0.38
  *
- * @generated from message tendermint.state.ABCIResponses
+ * @generated from message tendermint.state.LegacyABCIResponses
  */
-export class ABCIResponses extends Message<ABCIResponses> {
+export class LegacyABCIResponses extends Message<LegacyABCIResponses> {
   /**
-   * @generated from field: repeated tendermint.abci.ResponseDeliverTx deliver_txs = 1;
+   * @generated from field: repeated tendermint.abci.ExecTxResult deliver_txs = 1;
    */
-  deliverTxs: ResponseDeliverTx[] = [];
+  deliverTxs: ExecTxResult[] = [];
 
   /**
-   * @generated from field: tendermint.abci.ResponseEndBlock end_block = 2;
+   * @generated from field: tendermint.state.ResponseEndBlock end_block = 2;
    */
   endBlock?: ResponseEndBlock;
 
   /**
-   * @generated from field: tendermint.abci.ResponseBeginBlock begin_block = 3;
+   * @generated from field: tendermint.state.ResponseBeginBlock begin_block = 3;
    */
   beginBlock?: ResponseBeginBlock;
 
-  constructor(data?: PartialMessage<ABCIResponses>) {
+  constructor(data?: PartialMessage<LegacyABCIResponses>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime = proto3;
-  static readonly typeName = "tendermint.state.ABCIResponses";
+  static readonly typeName = "tendermint.state.LegacyABCIResponses";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "deliver_txs", kind: "message", T: ResponseDeliverTx, repeated: true },
+    { no: 1, name: "deliver_txs", kind: "message", T: ExecTxResult, repeated: true },
     { no: 2, name: "end_block", kind: "message", T: ResponseEndBlock },
     { no: 3, name: "begin_block", kind: "message", T: ResponseBeginBlock },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ABCIResponses {
-    return new ABCIResponses().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LegacyABCIResponses {
+    return new LegacyABCIResponses().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ABCIResponses {
-    return new ABCIResponses().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LegacyABCIResponses {
+    return new LegacyABCIResponses().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ABCIResponses {
-    return new ABCIResponses().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LegacyABCIResponses {
+    return new LegacyABCIResponses().fromJsonString(jsonString, options);
   }
 
-  static equals(a: ABCIResponses | PlainMessage<ABCIResponses> | undefined, b: ABCIResponses | PlainMessage<ABCIResponses> | undefined): boolean {
-    return proto3.util.equals(ABCIResponses, a, b);
+  static equals(a: LegacyABCIResponses | PlainMessage<LegacyABCIResponses> | undefined, b: LegacyABCIResponses | PlainMessage<LegacyABCIResponses> | undefined): boolean {
+    return proto3.util.equals(LegacyABCIResponses, a, b);
+  }
+}
+
+/**
+ * ResponseBeginBlock is kept for backwards compatibility for versions prior to v0.38
+ *
+ * @generated from message tendermint.state.ResponseBeginBlock
+ */
+export class ResponseBeginBlock extends Message<ResponseBeginBlock> {
+  /**
+   * @generated from field: repeated tendermint.abci.Event events = 1;
+   */
+  events: Event[] = [];
+
+  constructor(data?: PartialMessage<ResponseBeginBlock>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "tendermint.state.ResponseBeginBlock";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "events", kind: "message", T: Event, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ResponseBeginBlock {
+    return new ResponseBeginBlock().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ResponseBeginBlock {
+    return new ResponseBeginBlock().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ResponseBeginBlock {
+    return new ResponseBeginBlock().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ResponseBeginBlock | PlainMessage<ResponseBeginBlock> | undefined, b: ResponseBeginBlock | PlainMessage<ResponseBeginBlock> | undefined): boolean {
+    return proto3.util.equals(ResponseBeginBlock, a, b);
+  }
+}
+
+/**
+ * ResponseEndBlock is kept for backwards compatibility for versions prior to v0.38
+ *
+ * @generated from message tendermint.state.ResponseEndBlock
+ */
+export class ResponseEndBlock extends Message<ResponseEndBlock> {
+  /**
+   * @generated from field: repeated tendermint.abci.ValidatorUpdate validator_updates = 1;
+   */
+  validatorUpdates: ValidatorUpdate[] = [];
+
+  /**
+   * @generated from field: tendermint.types.ConsensusParams consensus_param_updates = 2;
+   */
+  consensusParamUpdates?: ConsensusParams;
+
+  /**
+   * @generated from field: repeated tendermint.abci.Event events = 3;
+   */
+  events: Event[] = [];
+
+  constructor(data?: PartialMessage<ResponseEndBlock>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "tendermint.state.ResponseEndBlock";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "validator_updates", kind: "message", T: ValidatorUpdate, repeated: true },
+    { no: 2, name: "consensus_param_updates", kind: "message", T: ConsensusParams },
+    { no: 3, name: "events", kind: "message", T: Event, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ResponseEndBlock {
+    return new ResponseEndBlock().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ResponseEndBlock {
+    return new ResponseEndBlock().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ResponseEndBlock {
+    return new ResponseEndBlock().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ResponseEndBlock | PlainMessage<ResponseEndBlock> | undefined, b: ResponseEndBlock | PlainMessage<ResponseEndBlock> | undefined): boolean {
+    return proto3.util.equals(ResponseEndBlock, a, b);
   }
 }
 
@@ -159,14 +250,19 @@ export class ConsensusParamsInfo extends Message<ConsensusParamsInfo> {
  */
 export class ABCIResponsesInfo extends Message<ABCIResponsesInfo> {
   /**
-   * @generated from field: tendermint.state.ABCIResponses abci_responses = 1;
+   * @generated from field: tendermint.state.LegacyABCIResponses legacy_abci_responses = 1;
    */
-  abciResponses?: ABCIResponses;
+  legacyAbciResponses?: LegacyABCIResponses;
 
   /**
    * @generated from field: int64 height = 2;
    */
   height = protoInt64.zero;
+
+  /**
+   * @generated from field: tendermint.abci.ResponseFinalizeBlock response_finalize_block = 3;
+   */
+  responseFinalizeBlock?: ResponseFinalizeBlock;
 
   constructor(data?: PartialMessage<ABCIResponsesInfo>) {
     super();
@@ -176,8 +272,9 @@ export class ABCIResponsesInfo extends Message<ABCIResponsesInfo> {
   static readonly runtime = proto3;
   static readonly typeName = "tendermint.state.ABCIResponsesInfo";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "abci_responses", kind: "message", T: ABCIResponses },
+    { no: 1, name: "legacy_abci_responses", kind: "message", T: LegacyABCIResponses },
     { no: 2, name: "height", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "response_finalize_block", kind: "message", T: ResponseFinalizeBlock },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ABCIResponsesInfo {

@@ -1,5 +1,4 @@
 syntax = "proto3";
-
 package tendermint.privval;
 
 import "gogoproto/gogo.proto";

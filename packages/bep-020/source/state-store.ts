@@ -36,7 +36,7 @@ export async function makeState(
 	})
 	let consumedGas = BigInt(0)
 	let milestone: Milestone | undefined
-	let candidateBlock: abci.RequestBeginBlock | undefined
+	let candidateBlock: abci.RequestFinalizeBlock | undefined
 
 	function getMultiStore() {
 		return multiStore
@@ -54,7 +54,7 @@ export async function makeState(
 		return consumedGas
 	}
 
-	function setCandidateBlock(value: abci.RequestBeginBlock) {
+	function setCandidateBlock(value: abci.RequestFinalizeBlock) {
 		assert.defined(value)
 
 		candidateBlock = value
@@ -81,8 +81,8 @@ export async function makeState(
 		consumedGas = value
 	}
 
-	async function setCommittedBlock(block: abci.RequestBeginBlock) {
-		assert.defined(block?.header?.height)
+	async function setCommittedBlock(block: abci.RequestFinalizeBlock) {
+		assert.defined(block?.height)
 
 		await multiStore.get(STORE_WORLD).set(TK_COMMITTED_BLOCK, block.toBinary())
 	}
@@ -110,7 +110,7 @@ export async function makeState(
 	}
 
 	async function getCommittedBlock() {
-		return abci.RequestBeginBlock.fromBinary(
+		return abci.RequestFinalizeBlock.fromBinary(
 			await multiStore.get(STORE_WORLD).get(TK_COMMITTED_BLOCK),
 			PROTO_OPTS,
 		)
@@ -184,14 +184,14 @@ export async function makeState(
 				}
 			}
 
-			assert.defined(candidateBlock?.header?.height)
+			assert.defined(candidateBlock?.height)
 
 			/**
 			 * The `AppHash` is the root hash after all updates.
 			 * > We don't need to persist this since it will be restored!
 			 */
 			return {
-				height: candidateBlock.header.height,
+				height: candidateBlock.height,
 				root: multiStore.get(STORE_WORLD).root(),
 			}
 		},
@@ -225,29 +225,25 @@ export async function makeState(
 			return candidateBlock.hash
 		},
 		getCandidateBlockNumber(): bigint {
-			assert.defined(candidateBlock?.header?.height)
+			assert.defined(candidateBlock?.height)
 
-			return candidateBlock.header.height
+			return candidateBlock.height
 		},
 		getCandidateBlockProposer() {
-			assert.defined<Buffer>(candidateBlock?.header?.proposerAddress)
+			assert.defined<Buffer>(candidateBlock?.proposerAddress)
 
-			return candidateBlock.header.proposerAddress
+			return candidateBlock.proposerAddress
 		},
 		getCommittedBlock,
 		async getCommittedBlockAppHash() {
-			const committedBlock = await getCommittedBlock()
-
-			assert.defined(committedBlock.header?.appHash)
-
-			return committedBlock.header.appHash
+			return getAppHash()
 		},
 		async getCommittedBlockNumber() {
 			const committedBlock = await getCommittedBlock()
 
-			assert.defined(committedBlock.header?.height)
+			assert.defined(committedBlock?.height)
 
-			return committedBlock.header.height
+			return committedBlock.height
 		},
 		getConsumedGas,
 		getMilestone,

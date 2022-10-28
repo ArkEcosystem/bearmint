@@ -72,31 +72,6 @@ export interface EventRecorderFactory {
 	make(): EventRecorder
 }
 
-export enum TendermintHandler {
-	ApplySnapshotChunk = 'TendermintHandler.applySnapshotChunk',
-	// @deprecated going to be replaced by "finalizeBlock"
-	BeginBlock = 'TendermintHandler.beginBlock',
-	CheckTx = 'TendermintHandler.checkTx',
-	Commit = 'TendermintHandler.commit',
-	// @deprecated going to be replaced by "finalizeBlock"
-	DeliverTx = 'TendermintHandler.deliverTx',
-	Echo = 'TendermintHandler.echo',
-	// @deprecated going to be replaced by "finalizeBlock"
-	EndBlock = 'TendermintHandler.endBlock',
-	ExtendVote = 'TendermintHandler.extendVote',
-	FinalizeBlock = 'TendermintHandler.finalizeBlock',
-	Flush = 'TendermintHandler.flush',
-	Info = 'TendermintHandler.info',
-	InitChain = 'TendermintHandler.initChain',
-	ListSnapshots = 'TendermintHandler.listSnapshots',
-	LoadSnapshotChunk = 'TendermintHandler.loadSnapshotChunk',
-	OfferSnapshot = 'TendermintHandler.offerSnapshot',
-	PrepareProposal = 'TendermintHandler.prepareProposal',
-	ProcessProposal = 'TendermintHandler.processProposal',
-	Query = 'TendermintHandler.query',
-	VerifyVoteExtension = 'TendermintHandler.verifyVoteExtension',
-}
-
 export interface QueryHandlerOpts {
 	data: Uint8Array | undefined
 	path: string[]

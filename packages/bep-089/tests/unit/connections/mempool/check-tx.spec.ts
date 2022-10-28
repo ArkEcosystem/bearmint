@@ -14,9 +14,9 @@ import { abci } from '@bearmint/bep-018'
 describe('CheckTx', () => {
 	it('should respond without any errors', async () => {
 		const CheckTxState = await fakeStateStore()
-		CheckTxState.setCandidateBlock(new abci.RequestBeginBlock({ header: { height: BigInt(1) } }))
+		CheckTxState.setCandidateBlock(new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }))
 		await CheckTxState.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(1) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
 		)
 
 		const TxProcessor = spyFn()
@@ -89,9 +89,9 @@ describe('CheckTx', () => {
 
 	it('should respond without any errors if its a recheck', async () => {
 		const CheckTxState = await fakeStateStore()
-		CheckTxState.setCandidateBlock(new abci.RequestBeginBlock({ header: { height: BigInt(1) } }))
+		CheckTxState.setCandidateBlock(new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }))
 		await CheckTxState.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(1) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
 		)
 
 		const TxProcessor = spyFn()

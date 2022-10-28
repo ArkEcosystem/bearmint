@@ -1,5 +1,4 @@
 syntax = "proto3";
-
 package tendermint.libs.bits;
 
 option go_package = "github.com/tendermint/tendermint/proto/tendermint/libs/bits";

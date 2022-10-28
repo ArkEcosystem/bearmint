@@ -12,7 +12,7 @@ describe<TxTestContext>('Tx Integration', () => {
 
 	it('should run through the entire lifecycle of processing the tx', async (context) => {
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(100) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(100) } }),
 		)
 
 		const { sender, tx } = await createTx(context)

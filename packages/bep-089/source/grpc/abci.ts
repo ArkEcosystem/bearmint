@@ -12,10 +12,8 @@ import type { Message } from '@bufbuild/protobuf'
 import type { sendUnaryData, ServerUnaryCall } from '@grpc/grpc-js'
 import { status, UntypedHandleCall } from '@grpc/grpc-js'
 
-import { makeBeginBlock } from '../connections/consensus/begin-block.js'
 import { makeCommit } from '../connections/consensus/commit.js'
-import { makeDeliverTx } from '../connections/consensus/deliver-tx.js'
-import { makeEndBlock } from '../connections/consensus/end-block.js'
+import { makeFinalizeBlock } from '../connections/consensus/finalize-block.js'
 import { makeInitChain } from '../connections/consensus/init-chain.js'
 import { makePrepareProposal } from '../connections/consensus/prepare-proposal.js'
 import { makeProcessProposal } from '../connections/consensus/process-proposal.js'
@@ -31,7 +29,7 @@ import { makeOfferSnapshot } from '../connections/snapshot/offer-snapshot.js'
 import { MUTEXES } from '../mutex.js'
 import { ServiceError } from './error.js'
 
-export class ABCI {
+export class ABCIService {
 	[method: string]: UntypedHandleCall
 
 	readonly #container: Container
@@ -64,14 +62,6 @@ export class ABCI {
 	) {
 		await this.#runMethod('info', makeInfo, call, callback)
 	}
-
-	public async deliverTx(
-		call: ServerUnaryCall<abci.RequestDeliverTx, abci.ResponseDeliverTx>,
-		callback: sendUnaryData<abci.ResponseDeliverTx>,
-	) {
-		await this.#runMethod('deliverTx', makeDeliverTx, call, callback)
-	}
-
 	public async checkTx(
 		call: ServerUnaryCall<abci.RequestCheckTx, abci.ResponseCheckTx>,
 		callback: sendUnaryData<abci.ResponseCheckTx>,
@@ -100,18 +90,11 @@ export class ABCI {
 		await this.#runMethod('initChain', makeInitChain, call, callback)
 	}
 
-	public async beginBlock(
-		call: ServerUnaryCall<abci.RequestBeginBlock, abci.ResponseBeginBlock>,
-		callback: sendUnaryData<abci.ResponseBeginBlock>,
+	public async finalizeBlock(
+		call: ServerUnaryCall<abci.RequestFinalizeBlock, abci.ResponseFinalizeBlock>,
+		callback: sendUnaryData<abci.ResponseFinalizeBlock>,
 	) {
-		await this.#runMethod('beginBlock', makeBeginBlock, call, callback)
-	}
-
-	public async endBlock(
-		call: ServerUnaryCall<abci.RequestEndBlock, abci.ResponseEndBlock>,
-		callback: sendUnaryData<abci.ResponseEndBlock>,
-	) {
-		await this.#runMethod('endBlock', makeEndBlock, call, callback)
+		await this.#runMethod('finalizeBlock', makeFinalizeBlock, call, callback)
 	}
 
 	public async listSnapshots(

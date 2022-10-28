@@ -1,5 +1,4 @@
 syntax = "proto3";
-
 package tendermint.blocksync;
 
 import "tendermint/types/block.proto";

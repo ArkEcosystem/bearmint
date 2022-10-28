@@ -1,8 +1,8 @@
 import type { Cradle } from '@bearmint/bep-013'
-import { ABCIApplication } from '@bearmint/bep-018'
+import { ABCI } from '@bearmint/bep-018'
 import { Server, ServerCredentials } from '@grpc/grpc-js'
 
-import { ABCI } from './abci.js'
+import { ABCIService } from './abci.js'
 import { createGrpcServiceDefinition } from './proto.js'
 
 const ABCI_MAX_MESSAGE_SIZE = 104_857_600
@@ -14,8 +14,8 @@ export function createGrpcServer(cradle: Cradle) {
 	})
 
 	server.addService(
-		createGrpcServiceDefinition(ABCIApplication),
-		new ABCI(cradle.Container, cradle.EventDispatcher, cradle.Logger),
+		createGrpcServiceDefinition(ABCI),
+		new ABCIService(cradle.Container, cradle.EventDispatcher, cradle.Logger),
 	)
 
 	return {

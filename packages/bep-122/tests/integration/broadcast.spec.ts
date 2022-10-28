@@ -13,7 +13,7 @@ describe<TxTestContext>('Tx Integration', () => {
 		const { sender, tx } = await createTx(context)
 
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(11) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(11) } }),
 		)
 
 		await expect(sender).toBeValidator({

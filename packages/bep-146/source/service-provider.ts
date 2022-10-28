@@ -24,10 +24,10 @@ export function makeServiceProvider(cradle: Cradle): ServiceProvider {
 				makeVersionedRegistryFactory,
 			)
 
-			// Flush the data sink before every block
+			// Flush the data sink before every proposal
 			cradle.EventDispatcher.listen(Event.AbciRequestProcessing, (ctx: Cradle) => ({
 				async execute(data) {
-					if (data.method !== 'beginBlock') {
+					if (data.method !== 'prepareProposal') {
 						return
 					}
 

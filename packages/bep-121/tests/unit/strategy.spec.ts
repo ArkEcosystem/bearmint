@@ -116,7 +116,9 @@ describe<{
 			accountSerializer: fakeAccountSerializer({ container: context.container }),
 			container: context.container,
 		})
-		context.state.setCommittedBlock(new abci.RequestBeginBlock({ header: { height: BigInt(1) } }))
+		context.state.setCommittedBlock(
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
+		)
 		await context.state.getMultiStore().add('@bearmint/bep-120')
 		await context.state.getMultiStore().add('@bearmint/bep-121')
 

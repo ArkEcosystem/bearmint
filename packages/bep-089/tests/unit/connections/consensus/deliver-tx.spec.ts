@@ -15,9 +15,11 @@ import { abci } from '@bearmint/bep-018'
 describe('DeliverTx', () => {
 	it('it should respond without any errors', async () => {
 		const DeliverTxState = await fakeStateStore()
-		DeliverTxState.setCandidateBlock(new abci.RequestBeginBlock({ header: { height: BigInt(1) } }))
+		DeliverTxState.setCandidateBlock(
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
+		)
 		await DeliverTxState.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(1) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
 		)
 
 		const TxProcessor = spyFn()

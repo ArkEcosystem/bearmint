@@ -3,17 +3,17 @@
 /* eslint-disable */
 /* @ts-nocheck */
 
-import {RequestApplySnapshotChunk, RequestBeginBlock, RequestCheckTx, RequestCommit, RequestDeliverTx, RequestEcho, RequestEndBlock, RequestFlush, RequestInfo, RequestInitChain, RequestListSnapshots, RequestLoadSnapshotChunk, RequestOfferSnapshot, RequestPrepareProposal, RequestProcessProposal, RequestQuery, ResponseApplySnapshotChunk, ResponseBeginBlock, ResponseCheckTx, ResponseCommit, ResponseDeliverTx, ResponseEcho, ResponseEndBlock, ResponseFlush, ResponseInfo, ResponseInitChain, ResponseListSnapshots, ResponseLoadSnapshotChunk, ResponseOfferSnapshot, ResponsePrepareProposal, ResponseProcessProposal, ResponseQuery} from "./types_pb.js";
+import {RequestApplySnapshotChunk, RequestCheckTx, RequestCommit, RequestEcho, RequestFinalizeBlock, RequestFlush, RequestInfo, RequestInitChain, RequestListSnapshots, RequestLoadSnapshotChunk, RequestOfferSnapshot, RequestPrepareProposal, RequestProcessProposal, RequestQuery, ResponseApplySnapshotChunk, ResponseCheckTx, ResponseCommit, ResponseEcho, ResponseFinalizeBlock, ResponseFlush, ResponseInfo, ResponseInitChain, ResponseListSnapshots, ResponseLoadSnapshotChunk, ResponseOfferSnapshot, ResponsePrepareProposal, ResponseProcessProposal, ResponseQuery} from "./types_pb.js";
 import {MethodKind} from "@bufbuild/protobuf";
 
 /**
- * @generated from service tendermint.abci.ABCIApplication
+ * @generated from service tendermint.abci.ABCI
  */
-export const ABCIApplication = {
-  typeName: "tendermint.abci.ABCIApplication",
+export const ABCI = {
+  typeName: "tendermint.abci.ABCI",
   methods: {
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.Echo
+     * @generated from rpc tendermint.abci.ABCI.Echo
      */
     echo: {
       name: "Echo",
@@ -22,7 +22,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.Flush
+     * @generated from rpc tendermint.abci.ABCI.Flush
      */
     flush: {
       name: "Flush",
@@ -31,7 +31,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.Info
+     * @generated from rpc tendermint.abci.ABCI.Info
      */
     info: {
       name: "Info",
@@ -40,16 +40,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.DeliverTx
-     */
-    deliverTx: {
-      name: "DeliverTx",
-      I: RequestDeliverTx,
-      O: ResponseDeliverTx,
-      kind: MethodKind.Unary,
-    },
-    /**
-     * @generated from rpc tendermint.abci.ABCIApplication.CheckTx
+     * @generated from rpc tendermint.abci.ABCI.CheckTx
      */
     checkTx: {
       name: "CheckTx",
@@ -58,7 +49,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.Query
+     * @generated from rpc tendermint.abci.ABCI.Query
      */
     query: {
       name: "Query",
@@ -67,7 +58,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.Commit
+     * @generated from rpc tendermint.abci.ABCI.Commit
      */
     commit: {
       name: "Commit",
@@ -76,7 +67,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.InitChain
+     * @generated from rpc tendermint.abci.ABCI.InitChain
      */
     initChain: {
       name: "InitChain",
@@ -85,25 +76,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.BeginBlock
-     */
-    beginBlock: {
-      name: "BeginBlock",
-      I: RequestBeginBlock,
-      O: ResponseBeginBlock,
-      kind: MethodKind.Unary,
-    },
-    /**
-     * @generated from rpc tendermint.abci.ABCIApplication.EndBlock
-     */
-    endBlock: {
-      name: "EndBlock",
-      I: RequestEndBlock,
-      O: ResponseEndBlock,
-      kind: MethodKind.Unary,
-    },
-    /**
-     * @generated from rpc tendermint.abci.ABCIApplication.ListSnapshots
+     * @generated from rpc tendermint.abci.ABCI.ListSnapshots
      */
     listSnapshots: {
       name: "ListSnapshots",
@@ -112,7 +85,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.OfferSnapshot
+     * @generated from rpc tendermint.abci.ABCI.OfferSnapshot
      */
     offerSnapshot: {
       name: "OfferSnapshot",
@@ -121,7 +94,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.LoadSnapshotChunk
+     * @generated from rpc tendermint.abci.ABCI.LoadSnapshotChunk
      */
     loadSnapshotChunk: {
       name: "LoadSnapshotChunk",
@@ -130,7 +103,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.ApplySnapshotChunk
+     * @generated from rpc tendermint.abci.ABCI.ApplySnapshotChunk
      */
     applySnapshotChunk: {
       name: "ApplySnapshotChunk",
@@ -139,7 +112,7 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.PrepareProposal
+     * @generated from rpc tendermint.abci.ABCI.PrepareProposal
      */
     prepareProposal: {
       name: "PrepareProposal",
@@ -148,12 +121,21 @@ export const ABCIApplication = {
       kind: MethodKind.Unary,
     },
     /**
-     * @generated from rpc tendermint.abci.ABCIApplication.ProcessProposal
+     * @generated from rpc tendermint.abci.ABCI.ProcessProposal
      */
     processProposal: {
       name: "ProcessProposal",
       I: RequestProcessProposal,
       O: ResponseProcessProposal,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc tendermint.abci.ABCI.FinalizeBlock
+     */
+    finalizeBlock: {
+      name: "FinalizeBlock",
+      I: RequestFinalizeBlock,
+      O: ResponseFinalizeBlock,
       kind: MethodKind.Unary,
     },
   }

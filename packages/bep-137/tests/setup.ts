@@ -60,7 +60,7 @@ export async function createTx(context: TxTestContext, payload?: object) {
 	)
 
 	await context.state.setCommittedBlock(
-		new abci.RequestBeginBlock({ header: { height: BigInt(5) } }),
+		new abci.RequestFinalizeBlock({ header: { height: BigInt(5) } }),
 	)
 
 	// Act...

@@ -89,7 +89,7 @@ export function setUp(beforeEach: CallableFunction) {
 		await context.container.build(BEP64).register()
 
 		await context.state.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(10) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(10) } }),
 		)
 	})
 }

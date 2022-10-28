@@ -31,10 +31,10 @@ export function makeAccountListener(cradle: Cradle): EventListener<Account> {
 
 export function makeBlockListener(
 	cradle: Cradle,
-): EventListener<{ method: string; request: abci.RequestBeginBlock }> {
+): EventListener<{ method: string; request: abci.RequestFinalizeBlock }> {
 	return {
 		async execute(data) {
-			if (data.method !== 'beginBlock') {
+			if (data.method !== 'finalizeBlock') {
 				return
 			}
 

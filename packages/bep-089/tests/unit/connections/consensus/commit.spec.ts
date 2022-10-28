@@ -12,9 +12,11 @@ import { config } from '@bearmint/bep-006'
 describe('Commit', () => {
 	it('it should respond without any errors', async () => {
 		const CommittedState = await fakeStateStore()
-		CommittedState.setCandidateBlock(new abci.RequestBeginBlock({ header: { height: BigInt(1) } }))
+		CommittedState.setCandidateBlock(
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
+		)
 		await CommittedState.setCommittedBlock(
-			new abci.RequestBeginBlock({ header: { height: BigInt(1) } }),
+			new abci.RequestFinalizeBlock({ header: { height: BigInt(1) } }),
 		)
 		CommittedState.setMilestone(config.milestones[0])
 

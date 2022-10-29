@@ -3,7 +3,7 @@
 /* eslint-disable */
 /* @ts-nocheck */
 
-import {RequestApplySnapshotChunk, RequestCheckTx, RequestCommit, RequestEcho, RequestFinalizeBlock, RequestFlush, RequestInfo, RequestInitChain, RequestListSnapshots, RequestLoadSnapshotChunk, RequestOfferSnapshot, RequestPrepareProposal, RequestProcessProposal, RequestQuery, ResponseApplySnapshotChunk, ResponseCheckTx, ResponseCommit, ResponseEcho, ResponseFinalizeBlock, ResponseFlush, ResponseInfo, ResponseInitChain, ResponseListSnapshots, ResponseLoadSnapshotChunk, ResponseOfferSnapshot, ResponsePrepareProposal, ResponseProcessProposal, ResponseQuery} from "./types_pb.js";
+import {RequestApplySnapshotChunk, RequestCheckTx, RequestCommit, RequestEcho, RequestExtendVote, RequestFinalizeBlock, RequestFlush, RequestInfo, RequestInitChain, RequestListSnapshots, RequestLoadSnapshotChunk, RequestOfferSnapshot, RequestPrepareProposal, RequestProcessProposal, RequestQuery, RequestVerifyVoteExtension, ResponseApplySnapshotChunk, ResponseCheckTx, ResponseCommit, ResponseEcho, ResponseExtendVote, ResponseFinalizeBlock, ResponseFlush, ResponseInfo, ResponseInitChain, ResponseListSnapshots, ResponseLoadSnapshotChunk, ResponseOfferSnapshot, ResponsePrepareProposal, ResponseProcessProposal, ResponseQuery, ResponseVerifyVoteExtension} from "./types_pb.js";
 import {MethodKind} from "@bufbuild/protobuf";
 
 /**
@@ -127,6 +127,24 @@ export const ABCI = {
       name: "ProcessProposal",
       I: RequestProcessProposal,
       O: ResponseProcessProposal,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc tendermint.abci.ABCI.ExtendVote
+     */
+    extendVote: {
+      name: "ExtendVote",
+      I: RequestExtendVote,
+      O: ResponseExtendVote,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc tendermint.abci.ABCI.VerifyVoteExtension
+     */
+    verifyVoteExtension: {
+      name: "VerifyVoteExtension",
+      I: RequestVerifyVoteExtension,
+      O: ResponseVerifyVoteExtension,
       kind: MethodKind.Unary,
     },
     /**

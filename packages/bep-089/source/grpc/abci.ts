@@ -13,10 +13,12 @@ import type { sendUnaryData, ServerUnaryCall } from '@grpc/grpc-js'
 import { status, UntypedHandleCall } from '@grpc/grpc-js'
 
 import { makeCommit } from '../connections/consensus/commit.js'
+import { makeExtendVote } from '../connections/consensus/extend-vote.js'
 import { makeFinalizeBlock } from '../connections/consensus/finalize-block.js'
 import { makeInitChain } from '../connections/consensus/init-chain.js'
 import { makePrepareProposal } from '../connections/consensus/prepare-proposal.js'
 import { makeProcessProposal } from '../connections/consensus/process-proposal.js'
+import { makeVerifyVoteExtension } from '../connections/consensus/verify-vote-extension.js'
 import { makeEcho } from '../connections/echo.js'
 import { makeFlush } from '../connections/flush.js'
 import { makeInfo } from '../connections/info/info.js'
@@ -137,6 +139,20 @@ export class ABCIService {
 		callback: sendUnaryData<abci.ResponseProcessProposal>,
 	) {
 		await this.#runMethod('processProposal', makeProcessProposal, call, callback)
+	}
+
+	public async extendVote(
+		call: ServerUnaryCall<abci.RequestExtendVote, abci.ResponseExtendVote>,
+		callback: sendUnaryData<abci.ResponseExtendVote>,
+	) {
+		await this.#runMethod('extendVote', makeExtendVote, call, callback)
+	}
+
+	public async verifyVoteExtension(
+		call: ServerUnaryCall<abci.RequestVerifyVoteExtension, abci.ResponseVerifyVoteExtension>,
+		callback: sendUnaryData<abci.ResponseVerifyVoteExtension>,
+	) {
+		await this.#runMethod('verifyVoteExtension', makeVerifyVoteExtension, call, callback)
 	}
 
 	async #runMethod<Request extends Message, Response>(

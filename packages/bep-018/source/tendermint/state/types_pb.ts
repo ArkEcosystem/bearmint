@@ -250,9 +250,9 @@ export class ConsensusParamsInfo extends Message<ConsensusParamsInfo> {
  */
 export class ABCIResponsesInfo extends Message<ABCIResponsesInfo> {
   /**
-   * @generated from field: tendermint.state.LegacyABCIResponses legacy_abci_responses = 1;
+   * @generated from field: tendermint.state.LegacyABCIResponses legaycy_abci_responses = 1;
    */
-  legacyAbciResponses?: LegacyABCIResponses;
+  legaycyAbciResponses?: LegacyABCIResponses;
 
   /**
    * @generated from field: int64 height = 2;
@@ -272,7 +272,7 @@ export class ABCIResponsesInfo extends Message<ABCIResponsesInfo> {
   static readonly runtime = proto3;
   static readonly typeName = "tendermint.state.ABCIResponsesInfo";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "legacy_abci_responses", kind: "message", T: LegacyABCIResponses },
+    { no: 1, name: "legaycy_abci_responses", kind: "message", T: LegacyABCIResponses },
     { no: 2, name: "height", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "response_finalize_block", kind: "message", T: ResponseFinalizeBlock },
   ]);

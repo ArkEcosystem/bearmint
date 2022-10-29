@@ -28,6 +28,8 @@ service ABCI {
   rpc ApplySnapshotChunk(RequestApplySnapshotChunk) returns (ResponseApplySnapshotChunk);
   rpc PrepareProposal(RequestPrepareProposal) returns (ResponsePrepareProposal);
   rpc ProcessProposal(RequestProcessProposal) returns (ResponseProcessProposal);
+  rpc ExtendVote(RequestExtendVote) returns (ResponseExtendVote);
+  rpc VerifyVoteExtension(RequestVerifyVoteExtension) returns (ResponseVerifyVoteExtension);
   rpc FinalizeBlock(RequestFinalizeBlock) returns (ResponseFinalizeBlock);
 }
 
@@ -49,6 +51,8 @@ message Request {
     RequestApplySnapshotChunk apply_snapshot_chunk = 15;
     RequestPrepareProposal prepare_proposal = 16;
     RequestProcessProposal process_proposal = 17;
+    RequestExtendVote extend_vote = 18;
+    RequestVerifyVoteExtension verify_vote_extension = 19;
     RequestFinalizeBlock finalize_block = 20;
   }
   reserved 4, 7, 9, 10; // SetOption, BeginBlock, DeliverTx, EndBlock
@@ -128,7 +132,7 @@ message RequestPrepareProposal {
   // sent to the app for possible modifications.
   repeated bytes txs = 2;
   ExtendedCommitInfo local_last_commit = 3 [(gogoproto.nullable) = false];
-  repeated Misbehavior misbehaviors = 4 [(gogoproto.nullable) = false];
+  repeated Misbehavior misbehavior = 4 [(gogoproto.nullable) = false];
   int64 height = 5;
   google.protobuf.Timestamp time = 6 [
     (gogoproto.nullable) = false,
@@ -142,7 +146,7 @@ message RequestPrepareProposal {
 message RequestProcessProposal {
   repeated bytes txs = 1;
   CommitInfo proposed_last_commit = 2 [(gogoproto.nullable) = false];
-  repeated Misbehavior misbehaviors = 3 [(gogoproto.nullable) = false];
+  repeated Misbehavior misbehavior = 3 [(gogoproto.nullable) = false];
   // hash is the merkle root hash of the fields of the proposed block.
   bytes hash = 4;
   int64 height = 5;
@@ -155,10 +159,28 @@ message RequestProcessProposal {
   bytes proposer_address = 8;
 }
 
+// Extends a vote with application-injected data
+message RequestExtendVote {
+  // the hash of the block of data that this vote will be signing
+  bytes block_hash = 1;
+  // the height of the block that this vote will be signing
+  int64 height = 2;
+}
+
+// Verify the vote extension
+message RequestVerifyVoteExtension {
+  // the hash of the block of data that this received vote corresponds to
+  bytes block_hash = 1;
+  // the validator that signed the vote extension
+  bytes validator_address = 2;
+  int64 height = 3;
+  bytes vote_extension = 4;
+}
+
 message RequestFinalizeBlock {
   repeated bytes txs = 1;
   CommitInfo decided_last_commit = 2 [(gogoproto.nullable) = false];
-  repeated Misbehavior misbehaviors = 3 [(gogoproto.nullable) = false];
+  repeated Misbehavior misbehavior = 3 [(gogoproto.nullable) = false];
   // hash is the merkle root hash of the fields of the decided block.
   bytes hash = 4;
   int64 height = 5;
@@ -190,6 +212,8 @@ message Response {
     ResponseApplySnapshotChunk apply_snapshot_chunk = 16;
     ResponsePrepareProposal prepare_proposal = 17;
     ResponseProcessProposal process_proposal = 18;
+    ResponseExtendVote extend_vote = 19;
+    ResponseVerifyVoteExtension verify_vote_extension = 20;
     ResponseFinalizeBlock finalize_block = 21;
   }
   reserved 5, 8, 10, 11; // SetOption, BeginBlock, DeliverTx, EndBlock
@@ -310,6 +334,24 @@ message ResponseProcessProposal {
   }
 }
 
+message ResponseExtendVote {
+  bytes vote_extension = 1;
+}
+
+message ResponseVerifyVoteExtension {
+  VerifyStatus status = 1;
+
+  enum VerifyStatus {
+    UNKNOWN = 0;
+    ACCEPT = 1;
+    // Rejecting the vote extension will reject the entire precommit by the sender.
+    // Incorrectly implementing this thus has liveness implications as it may affect
+    // tendermint's ability to receive 2/3+ valid votes to finalize the block.
+    // Honest nodes should never be rejected.
+    REJECT = 2;
+  }
+}
+
 message ResponseFinalizeBlock {
   // set of block events emmitted as part of executing the block
   repeated Event events = 1 [
@@ -336,6 +378,9 @@ message CommitInfo {
   repeated VoteInfo votes = 2 [(gogoproto.nullable) = false];
 }
 
+// ExtendedCommitInfo is similar to CommitInfo except that it is only used in
+// the PrepareProposal request such that Tendermint can provide vote extensions
+// to the application.
 message ExtendedCommitInfo {
   // The round at which the block proposer decided in the previous height.
   int32 round = 1;
@@ -412,9 +457,12 @@ message VoteInfo {
 }
 
 message ExtendedVoteInfo {
+  // The validator that sent the vote.
   Validator validator = 1 [(gogoproto.nullable) = false];
+  // Indicates whether the validator signed the last block, allowing for rewards based on validator availability.
   bool signed_last_block = 2;
-  bytes vote_extension = 3; // Reserved for future use
+  // Non-deterministic extension provided by the sending validator's application.
+  bytes vote_extension = 3;
 }
 
 enum MisbehaviorType {

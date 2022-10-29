@@ -47,6 +47,10 @@ export interface StateStore {
 	getCommittedBlock(): Promise<abci.RequestFinalizeBlock>
 	setCommittedBlock(block: abci.RequestFinalizeBlock): Promise<void>
 	getCommittedBlockAppHash(): Promise<Uint8Array>
+
+	// The last set of validator updates
+	getValidatorUpdates(): Promise<abci.ValidatorUpdate[]>
+	setValidatorUpdates(updates: abci.ValidatorUpdate[]): Promise<void>
 }
 
 export interface AccountRepositoryFactory {

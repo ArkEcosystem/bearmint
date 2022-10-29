@@ -1,4 +1,4 @@
-import { BN } from '@bearmint/bep-009'
+import { assert, BN, hexToBytes } from '@bearmint/bep-009'
 import type {
 	AccountRepository,
 	AccountWithValidator,
@@ -7,7 +7,14 @@ import type {
 	StateStore,
 } from '@bearmint/bep-013'
 import { Event } from '@bearmint/bep-013'
+import { abci, crypto } from '@bearmint/bep-018'
 import { DoesNotSatisfyElectionConditionsError, Exception } from '@bearmint/bep-109'
+
+interface ValidatorUpdatesDiff {
+	created: abci.ValidatorUpdate[]
+	deleted: abci.ValidatorUpdate[]
+	updated: abci.ValidatorUpdate[]
+}
 
 export function sortValidators(validators: AccountWithValidator[]) {
 	return validators.sort((a, b) => {
@@ -107,4 +114,94 @@ export async function electValidators(
 	}
 
 	return accounts
+}
+
+export function canonicalizeValidatorUpdates(
+	type: string,
+	validators: AccountWithValidator[],
+): abci.ValidatorUpdate[] {
+	const result: abci.ValidatorUpdate[] = []
+
+	for (const { validator } of validators) {
+		result.push(
+			new abci.ValidatorUpdate({
+				power: validator.power,
+				pubKey: new crypto.PublicKey({
+					sum: {
+						case: type as any,
+						value: hexToBytes(validator.publicKey),
+					},
+				}),
+			}),
+		)
+	}
+
+	return result
+}
+
+/**
+ * @see https://github.com/tendermint/tendermint/blob/main/spec/abci/abci%2B%2B_app_requirements.md#updating-the-validator-set
+ */
+export function diffValidatorUpdates(
+	oldUpdates: abci.ValidatorUpdate[],
+	newUpdates: abci.ValidatorUpdate[],
+): ValidatorUpdatesDiff {
+	const created: abci.ValidatorUpdate[] = []
+	const deleted: abci.ValidatorUpdate[] = []
+	const updated: abci.ValidatorUpdate[] = []
+
+	for (const newUpdate of newUpdates) {
+		const remainsActive = oldUpdates.some((oldUpdate) => {
+			assert.defined(oldUpdate.pubKey?.sum.value)
+			assert.defined(newUpdate.pubKey?.sum.value)
+
+			return Buffer.from(oldUpdate.pubKey.sum.value).equals(newUpdate.pubKey.sum.value)
+		})
+
+		if (remainsActive) {
+			updated.push(newUpdate)
+		} else {
+			created.push(newUpdate)
+		}
+	}
+
+	for (const oldUpdate of oldUpdates) {
+		const remainsActive = newUpdates.some((newUpdate) => {
+			assert.defined(oldUpdate.pubKey?.sum.value)
+			assert.defined(newUpdate.pubKey?.sum.value)
+
+			return Buffer.from(oldUpdate.pubKey.sum.value).equals(newUpdate.pubKey.sum.value)
+		})
+
+		if (remainsActive) {
+			continue
+		}
+
+		deleted.push(oldUpdate)
+	}
+
+	return {
+		created,
+		deleted,
+		updated,
+	}
+}
+
+/**
+ * @see https://github.com/tendermint/tendermint/blob/main/spec/abci/abci%2B%2B_app_requirements.md#updating-the-validator-set
+ */
+export function formatValidatorUpdatesDiff(diff: ValidatorUpdatesDiff) {
+	const result: abci.ValidatorUpdate[] = []
+
+	for (const update of [...diff.created, ...diff.updated]) {
+		result.push(update)
+	}
+
+	for (const update of diff.deleted) {
+		update.power = BigInt(0)
+
+		result.push(update)
+	}
+
+	return result
 }

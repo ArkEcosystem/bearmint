@@ -4,9 +4,15 @@
  */
 
 import type { BEP88Milestone, Cradle, StateStore, ValidatorElector } from '@bearmint/bep-013'
-import { getModuleMilestone } from '@bearmint/bep-021'
+import { getModuleMilestone, getPublicKeyType } from '@bearmint/bep-021'
 
-import { electValidators, gatherEligibleValidators } from './utils.js'
+import {
+	canonicalizeValidatorUpdates,
+	diffValidatorUpdates,
+	electValidators,
+	formatValidatorUpdatesDiff,
+	gatherEligibleValidators,
+} from './utils.js'
 
 export function makeStrategy(cradle: Cradle): ValidatorElector {
 	return {
@@ -17,11 +23,19 @@ export function makeStrategy(cradle: Cradle): ValidatorElector {
 				'@bearmint/bep-088',
 			)
 
-			return electValidators(
-				cradle.CommittedState.getAccountRepository(),
-				await gatherEligibleValidators(state, cradle.EventDispatcher, milestone.range.power),
-				milestone.count.validators,
-				cradle.GenesisParameters.validators,
+			return formatValidatorUpdatesDiff(
+				diffValidatorUpdates(
+					await state.getValidatorUpdates(),
+					canonicalizeValidatorUpdates(
+						getPublicKeyType(state.getMilestone()),
+						await electValidators(
+							cradle.CommittedState.getAccountRepository(),
+							await gatherEligibleValidators(state, cradle.EventDispatcher, milestone.range.power),
+							milestone.count.validators,
+							cradle.GenesisParameters.validators,
+						),
+					),
+				),
 			)
 		},
 	}

@@ -1,7 +1,5 @@
-import { hexToBytes } from '@bearmint/bep-009'
-import type { AccountWithValidator, Container, Cradle, StateStore } from '@bearmint/bep-013'
+import type { Container, Cradle, StateStore } from '@bearmint/bep-013'
 import { ContainerType } from '@bearmint/bep-013'
-import { abci, crypto } from '@bearmint/bep-018'
 
 export function setCheckTxState(container: Container, state: StateStore) {
 	container.bindValue(ContainerType.CheckTxState, state)
@@ -9,32 +7,6 @@ export function setCheckTxState(container: Container, state: StateStore) {
 
 export function setExecuteTxState(container: Container, state: StateStore) {
 	container.bindValue(ContainerType.ExecuteTxState, state)
-}
-
-export function canonicalizeValidatorUpdates({
-	type,
-	validators,
-}: {
-	type: string
-	validators: AccountWithValidator[]
-}): abci.ValidatorUpdate[] {
-	const result: abci.ValidatorUpdate[] = []
-
-	for (const { validator } of validators) {
-		result.push(
-			new abci.ValidatorUpdate({
-				power: validator.power,
-				pubKey: new crypto.PublicKey({
-					sum: {
-						case: type as any,
-						value: hexToBytes(validator.publicKey),
-					},
-				}),
-			}),
-		)
-	}
-
-	return result
 }
 
 export async function resetState(cradle: Cradle) {

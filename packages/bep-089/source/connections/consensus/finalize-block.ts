@@ -2,10 +2,10 @@ import { assert, canonicalizeJson } from '@bearmint/bep-009'
 import type { ABCIController, Cradle, DataSink, Tx, TxReceipt } from '@bearmint/bep-013'
 import { ContainerType, Event, TxReceiptModelSubType, TxReceiptModelType } from '@bearmint/bep-013'
 import { abci } from '@bearmint/bep-018'
-import { getPublicKeyType, setMilestone } from '@bearmint/bep-021'
+import { setMilestone } from '@bearmint/bep-021'
 import { TxFailuresRecordedException } from '@bearmint/bep-109'
 
-import { canonicalizeValidatorUpdates, resetState } from './utils.js'
+import { resetState } from './utils.js'
 
 function receiptToDataSink(tx: Tx, receipt: TxReceipt, dataSink: DataSink) {
 	for (const log of receipt.logs()) {
@@ -215,10 +215,7 @@ async function endBlock(cradle: Cradle, request: abci.RequestFinalizeBlock) {
 		await setMilestone(cradle, cradle.ExecuteTxState, request.height)
 	).parameters.consensus
 
-	const validatorUpdates = canonicalizeValidatorUpdates({
-		type: getPublicKeyType(cradle.ExecuteTxState.getMilestone()),
-		validators: await cradle.ValidatorElector.elect(cradle.ExecuteTxState),
-	})
+	const validatorUpdates = await cradle.ValidatorElector.elect(cradle.ExecuteTxState)
 
 	cradle.DataSink.put(
 		'@bearmint/bep-089',
@@ -269,6 +266,8 @@ export function makeFinalizeBlock(
 
 			// Tendermint expects `last_block_app_hash` and `last_block_height` to be updated during `FinalizeBlock` and persisted during `Commit`
 			// TODO: set height and root and use world root after that as agreedAppData
+
+			await cradle.ExecuteTxState.setValidatorUpdates(endBlockResult.validatorUpdates)
 
 			return {
 				/**

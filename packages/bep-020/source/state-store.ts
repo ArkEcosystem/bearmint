@@ -1,6 +1,6 @@
 import { ok } from 'node:assert'
 
-import { assert, canonicalizeJson } from '@bearmint/bep-009'
+import { assert, canonicalizeJson, RLP } from '@bearmint/bep-009'
 import type {
 	AccountRepository,
 	AccountRepositoryFactory,
@@ -22,7 +22,7 @@ import {
 	STORE_TX_RECEIPT,
 	STORE_WORLD,
 } from './constants.js'
-import { TK_COMMITTED_BLOCK, TK_MILESTONE } from './types.js'
+import { TK_COMMITTED_BLOCK, TK_MILESTONE, TK_VALIDATOR_UPDATES } from './types.js'
 
 export async function makeState(
 	accountRepositoryFactory: AccountRepositoryFactory,
@@ -254,6 +254,29 @@ export async function makeState(
 		getTxStore() {
 			return multiStore.get(STORE_TX)
 		},
+		async getValidatorUpdates(): Promise<abci.ValidatorUpdate[]> {
+			if (await multiStore.get(STORE_WORLD).missing(TK_VALIDATOR_UPDATES)) {
+				return []
+			}
+
+			const updates = RLP.decode(await multiStore.get(STORE_WORLD).get(TK_VALIDATOR_UPDATES))
+
+			if (!Array.isArray(updates)) {
+				throw new TypeError(
+					`Expected updates to be of type [Array<Uint8Array>] but received [${typeof updates}]`,
+				)
+			}
+
+			return updates.map((update) => {
+				if (update instanceof Uint8Array) {
+					return abci.ValidatorUpdate.fromBinary(update)
+				}
+
+				throw new TypeError(
+					`Expected update to be of type [Uint8Array] but received [${typeof update}]`,
+				)
+			})
+		},
 		hasCandidateBlock() {
 			return candidateBlock !== undefined
 		},
@@ -268,5 +291,10 @@ export async function makeState(
 		setCommittedBlock,
 		setConsumedGas,
 		setMilestone,
+		async setValidatorUpdates(updates: abci.ValidatorUpdate[]): Promise<void> {
+			await multiStore
+				.get(STORE_WORLD)
+				.set(TK_VALIDATOR_UPDATES, RLP.encode(updates.map((update) => update.toBinary())))
+		},
 	}
 }

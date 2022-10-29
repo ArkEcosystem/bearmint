@@ -1,8 +1,9 @@
-import type { AccountWithValidator } from './account.js'
+import type { abci } from '@bearmint/bep-018'
+
 import type { StateStore } from './state.js'
 
 export interface ValidatorElector {
-	elect(state: StateStore): Promise<AccountWithValidator[]>
+	elect(state: StateStore): Promise<abci.ValidatorUpdate[]>
 }
 
 export interface BEP88Milestone {

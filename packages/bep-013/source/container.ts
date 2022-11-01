@@ -21,6 +21,7 @@ import type { VersionedRegistryFactory } from './registry.js'
 import type { DelegatorRewarder, ValidatorRewarder } from './reward.js'
 import type { ServiceProviderRepository } from './service-provider.js'
 import type { SlasherExecutor } from './slash.js'
+import type { SnapshotService } from './snapshot.js'
 import type {
 	AccountRepositoryFactory,
 	MultiStoreFactory,
@@ -72,9 +73,9 @@ export enum ContainerType {
 	DataSink = 'DataSink',
 	DelegatorRewarder = 'DelegatorRewarder',
 	DelegatorSlasher = 'DelegatorSlasher',
-	ExecuteTxState = 'ExecuteTxState',
 	EventDispatcher = 'EventDispatcher',
 	EventRecorderFactory = 'EventRecorderFactory',
+	ExecuteTxState = 'ExecuteTxState',
 	GasCalculator = 'GasCalculator',
 	GasMeterFactory = 'GasMeterFactory',
 	GenesisParameters = 'GenesisParameters',
@@ -91,6 +92,7 @@ export enum ContainerType {
 	QueryHandlerRegistry = 'QueryHandlerRegistry',
 	ServiceProviderRepository = 'ServiceProviderRepository',
 	SignatureFactory = 'SignatureFactory',
+	SnapshotService = 'SnapshotService',
 	StakingServiceFactory = 'StakingServiceFactory',
 	StrategyRegistry = 'StrategyRegistry',
 	Tendermint = 'Tendermint',
@@ -121,9 +123,9 @@ export type Cradle<T = Record<string, unknown>> = {
 	DataSink: DataSink
 	DelegatorRewarder: DelegatorRewarder
 	DelegatorSlasher: SlasherExecutor
-	ExecuteTxState: StateStore
 	EventDispatcher: EventDispatcher
 	EventRecorderFactory: EventRecorderFactory
+	ExecuteTxState: StateStore
 	GasCalculator: GasCalculator
 	GasMeterFactory: GasMeterFactory
 	GenesisParameters: GenesisParameters
@@ -140,6 +142,7 @@ export type Cradle<T = Record<string, unknown>> = {
 	QueryHandlerRegistry: QueryHandlerRegistry
 	ServiceProviderRepository: ServiceProviderRepository
 	SignatureFactory: SignatureFactory
+	SnapshotService: SnapshotService
 	StakingServiceFactory: StakingServiceFactory
 	StrategyRegistry: StrategyRegistry
 	Tendermint: Tendermint

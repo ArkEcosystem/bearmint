@@ -17,11 +17,9 @@ export function makeSignature(
 		async verify() {
 			try {
 				return await verify(signature, hash, publicKey)
-				/* c8 ignore start */
 			} catch {
 				return false
 			}
-			/* c8 ignore end */
 		},
 	}
 }

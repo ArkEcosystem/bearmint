@@ -38,7 +38,6 @@ export function makeSecretKey(privateKey: Buffer): BLS.SecretKeyType {
 export function makeMuSigFactory(): MuSigFactory {
 	const signatureFactory = makeSignatureFactory()
 
-	/* c8 ignore start */
 	return {
 		async aggregate(signatures: Buffer[]): Promise<Buffer> {
 			const result = new BLS.Signature()
@@ -54,7 +53,6 @@ export function makeMuSigFactory(): MuSigFactory {
 
 			return Buffer.from(result.serialize())
 		},
-		/* c8 ignore end */
 		async recover({ ids, signatures }: { ids: Buffer[]; signatures: Buffer[] }): Promise<Buffer> {
 			const result = new BLS.Signature()
 			result.recover(

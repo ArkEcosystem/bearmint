@@ -21,13 +21,14 @@ export function makeProcessProposal(): ABCIController<
 			// TODO: The Application may fully execute the block as though it was handling the calls to BeginBlock-ExecuteTx-EndBlock.
 			// TODO: However, any resulting state changes must be kept as candidate state, and the Application should be ready to discard it in case another block is decided.
 
-			// this.#beginBlock(request)
+			// const beginBlockResult = await beginBlock(cradle, request)
 
+			// const txResults: abci.ExecTxResult[] = []
 			// for (const tx of request.txs) {
-			// 	this.#executeTx(request, tx)
+			// 	await executeTx(cradle, tx)
 			// }
 
-			// this.#endBlock(request)
+			// const endBlockResult = await endBlock(cradle, request)
 
 			return {
 				status: abci.ResponseProcessProposal_ProposalStatus.ACCEPT,

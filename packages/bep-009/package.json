@@ -57,7 +57,7 @@
 	},
 	"devDependencies": {
 		"@bearmint/bep-005": "workspace:^",
-		"@types/node": "18.11.7",
+		"@types/node": "18.11.9",
 		"@types/semver": "7.3.13"
 	},
 	"engines": {

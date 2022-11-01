@@ -32,7 +32,6 @@ describe('Environment Paths', () => {
 		expect(paths.data.endsWith(name)).toBe(true)
 	})
 
-	/* c8 ignore start */
 	if (process.platform === 'linux') {
 		it('should set correct paths with XDG_*_HOME', () => {
 			const environmentVariables = {
@@ -56,5 +55,4 @@ describe('Environment Paths', () => {
 			}
 		})
 	}
-	/* c8 ignore end */
 })

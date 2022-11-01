@@ -39,12 +39,12 @@
 		"proto:format": "buf format -w"
 	},
 	"dependencies": {
-		"@bufbuild/connect-web": "^0.3.0",
-		"@bufbuild/protobuf": "0.2.0"
+		"@bufbuild/connect-web": "^0.3.1",
+		"@bufbuild/protobuf": "0.2.1"
 	},
 	"devDependencies": {
-		"@bufbuild/protoc-gen-connect-web": "^0.3.0",
-		"@bufbuild/protoc-gen-es": "0.2.0"
+		"@bufbuild/protoc-gen-connect-web": "^0.3.1",
+		"@bufbuild/protoc-gen-es": "0.2.1"
 	},
 	"engines": {
 		"node": ">=18",

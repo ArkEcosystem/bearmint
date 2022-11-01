@@ -14,7 +14,7 @@ export function makeSignature(
 		toString() {
 			return bytesToHex(signature)
 		},
-		/* c8 ignore start */
+
 		async verify() {
 			try {
 				return verify(signature, hash, publicKey)
@@ -22,7 +22,6 @@ export function makeSignature(
 				return false
 			}
 		},
-		/* c8 ignore end */
 	}
 }
 

@@ -81,6 +81,7 @@ import { makeServiceProvider as BEP144 } from '../../packages/bep-144/distributi
 import { makeServiceProvider as BEP145 } from '../../packages/bep-145/distribution/index.js'
 import { makeServiceProvider as BEP146 } from '../../packages/bep-146/distribution/index.js'
 import { makeServiceProvider as BEP147 } from '../../packages/bep-147/distribution/index.js'
+import { makeServiceProvider as BEP148 } from '../../packages/bep-148/distribution/index.js'
 
 const main = async () => {
 	const app = makeApplication(
@@ -175,6 +176,8 @@ const main = async () => {
 				// Tendermint...
 				BEP89,
 				BEP147,
+				// Snapshots...
+				BEP148,
 				// Indexer...
 				BEP100,
 			],

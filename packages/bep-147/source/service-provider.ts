@@ -13,10 +13,8 @@ import { ListTxHandlers } from './methods/tx/handlers.js'
 import { SimulateTx } from './methods/tx/simulate.js'
 
 export function makeServiceProvider(cradle: Cradle): ServiceProvider {
-	/* c8 ignore start */
 	return {
 		...makeServiceProviderSkeleton(import.meta.url),
-		/* c8 ignore end */
 		async register() {
 			cradle.QueryHandlerRegistry.add(FilterPeer)
 			cradle.QueryHandlerRegistry.add(QueryAccount)

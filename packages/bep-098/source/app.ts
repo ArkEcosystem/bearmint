@@ -13,7 +13,6 @@ import { ContainerType, Event } from '@bearmint/bep-013'
 
 import { loadJemalloc } from './jemalloc.js'
 
-/* c8 ignore start */
 export function makeApplication(
 	container: Container,
 	makeEventDispatcher: FactoryFunction<EventDispatcher>,
@@ -81,4 +80,3 @@ export function makeApplication(
 
 	return application
 }
-/* c8 ignore end */

@@ -20,3 +20,7 @@ level = "debug"
 [[modules."@bearmint/bep-100".hosts]]
 host = "http://railway.test/api"
 token = ""
+
+[modules."@bearmint/bep-148"]
+format = 0
+interval = 5

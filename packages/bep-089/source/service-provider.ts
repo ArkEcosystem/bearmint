@@ -5,7 +5,6 @@ import { makeServiceProviderSkeleton } from '@bearmint/bep-016'
 import { createGrpcServer } from './grpc/server.js'
 
 export function makeServiceProvider(cradle: Cradle): ServiceProvider {
-	/* c8 ignore start */
 	return {
 		...makeServiceProviderSkeleton(import.meta.url),
 		async boot() {
@@ -17,7 +16,6 @@ export function makeServiceProvider(cradle: Cradle): ServiceProvider {
 		async dispose() {
 			cradle.Container.resolve<Tendermint>(ContainerType.Tendermint).dispose()
 		},
-		/* c8 ignore end */
 		async register() {
 			cradle.Container.bindFunctionSingleton(ContainerType.Tendermint, createGrpcServer)
 		},

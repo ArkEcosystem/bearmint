@@ -1,3 +1,5 @@
+import 'abstract-level'
+
 import { assert } from '@bearmint/bep-009'
 import type { BatchDBOp, DB } from '@ethereumjs/trie'
 import { ClassicLevel } from 'classic-level'
@@ -70,5 +72,9 @@ export class LevelDB implements DB {
 
 	public async keys() {
 		return this.#database.keys().all()
+	}
+
+	public iterator() {
+		return this.#database.iterator()
 	}
 }

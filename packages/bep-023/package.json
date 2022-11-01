@@ -50,13 +50,14 @@
 		"@bearmint/bep-016": "workspace:^",
 		"@bearmint/bep-109": "workspace:^",
 		"@ethereumjs/trie": "5.0.1",
+		"abstract-level": "1.0.3",
 		"classic-level": "1.2.0",
 		"memory-level": "1.0.0"
 	},
 	"devDependencies": {
 		"@bearmint/bep-004": "workspace:^",
 		"@bearmint/bep-005": "workspace:^",
-		"@types/readable-stream": "2.3.14"
+		"@types/readable-stream": "2.3.15"
 	},
 	"engines": {
 		"node": ">=18",

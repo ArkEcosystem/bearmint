@@ -183,21 +183,19 @@ describe('JSON', () => {
 					toString() {
 						return 'recipient'
 					},
-					/* c8 ignore start */
+
 					verify() {
 						return true
 					},
-					/* c8 ignore end */
 				},
 				sender: {
 					toString() {
 						return 'sender'
 					},
-					/* c8 ignore start */
+
 					verify() {
 						return true
 					},
-					/* c8 ignore end */
 				},
 				signature: Buffer.from('signature'),
 				version: 'version',

@@ -2,9 +2,9 @@ import { bytesToJson, hexToBytes } from '@bearmint/bep-009'
 import type { ABCIController, Cradle } from '@bearmint/bep-013'
 import { Event } from '@bearmint/bep-013'
 import type { abci } from '@bearmint/bep-018'
-import { getPublicKeyType, setMilestone } from '@bearmint/bep-021'
+import { setMilestone } from '@bearmint/bep-021'
 
-import { canonicalizeValidatorUpdates, setCheckTxState, setExecuteTxState } from './utils.js'
+import { setCheckTxState, setExecuteTxState } from './utils.js'
 
 /**
  * @remarks
@@ -88,10 +88,7 @@ export function makeInitChain(
 			return {
 				appHash: hexToBytes(cradle.GenesisParameters.app_hash),
 				consensusParams: request.consensusParams,
-				validators: canonicalizeValidatorUpdates({
-					type: getPublicKeyType(cradle.CommittedState.getMilestone()),
-					validators: await cradle.ValidatorElector.elect(cradle.CommittedState),
-				}),
+				validators: await cradle.ValidatorElector.elect(cradle.CommittedState),
 			}
 		},
 	}

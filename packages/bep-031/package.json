@@ -42,7 +42,7 @@
 		"@bearmint/bep-005": "workspace:^",
 		"@bearmint/bep-006": "workspace:^",
 		"@bearmint/bep-013": "workspace:^",
-		"vitest": "^0.24.3"
+		"vitest": "^0.24.5"
 	},
 	"engines": {
 		"node": ">=18",

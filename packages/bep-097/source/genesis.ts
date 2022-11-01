@@ -29,12 +29,10 @@ export function getHomePath(count: number) {
 
 export function makeState(options: GenesisOptions) {
 	const result: Record<string, any> = {
-		/* c8 ignore start */
 		app_state: {
 			accounts: options.state.accounts ?? [],
 			txs: options.state.txs ?? [],
 		},
-		/* c8 ignore end */
 		chain_id: options.genesis.chainId,
 		consensus_params: options.genesis.consensusParameters,
 		genesis_time: new Date(options.genesis.genesisTime).toISOString(),

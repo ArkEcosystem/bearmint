@@ -54,9 +54,18 @@ export interface KVStore {
 	revert(): Promise<void>
 	addCheckpoint(checkpoint: KVStoreCheckpoint): void
 
-	// Snapshots
+	// Instance Snapshots (0.x)
 	clear(): Promise<void>
 	snapshot(target: KVStore, root?: Buffer): Promise<void>
+
+	/**
+	 * Physical Snapshots (1.x)
+	 *
+	 * @see https://github.com/tendermint/tendermint/blob/main/spec/abci/abci%2B%2B_app_requirements.md#taking-snapshots
+	 * @see https://github.com/tendermint/tendermint/blob/main/spec/abci/abci%2B%2B_app_requirements.md#snapshot-discovery
+	 */
+	takeSnapshot(): AsyncGenerator<[number, Uint8Array], void, unknown>
+	loadSnapshot(chunk: Uint8Array): Promise<void>
 
 	// Integrity
 	verifyIntegrity(): Promise<boolean>

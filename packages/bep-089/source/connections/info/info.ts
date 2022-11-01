@@ -19,8 +19,7 @@ export function makeInfo(cradle: Cradle): ABCIController<abci.RequestInfo, abci.
 				return {
 					...base,
 					data: cradle.ApplicationManifest.name,
-					// TODO: consider persisting and using `getCommittedBlockAppHash()`
-					lastBlockAppHash: cradle.CommittedState.getAppHash(),
+					lastBlockAppHash: await cradle.CommittedState.getCommittedBlockAppHash(),
 					lastBlockHeight: await cradle.CommittedState.getCommittedBlockNumber(),
 				}
 			} catch {

@@ -33,12 +33,12 @@ describe<{
 					throw new Error('ohno')
 				},
 			},
-			/* c8 ignore start */
+
 			validated: {
 				async execute() {
 					return { hello: 'world' }
 				},
-				/* c8 ignore end */
+
 				schema: {
 					properties: {
 						key: { type: 'string' },

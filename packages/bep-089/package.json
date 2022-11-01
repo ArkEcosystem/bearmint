@@ -55,7 +55,7 @@
 		"@bearmint/bep-021": "workspace:^",
 		"@bearmint/bep-022": "workspace:^",
 		"@bearmint/bep-109": "workspace:^",
-		"@bufbuild/protobuf": "0.2.0",
+		"@bufbuild/protobuf": "0.2.1",
 		"@grpc/grpc-js": "^1.7.3",
 		"async-mutex": "^0.4.0",
 		"serialize-error": "^11.0.0"

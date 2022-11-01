@@ -53,10 +53,10 @@
 		"pretty-ms": "8.0.0",
 		"sinon": "14.0.1",
 		"strip-ansi": "7.0.1",
-		"vitest": "^0.24.3"
+		"vitest": "^0.24.5"
 	},
 	"devDependencies": {
-		"@types/node": "18.11.7",
+		"@types/node": "18.11.9",
 		"@types/sinon": "10.0.13",
 		"@types/sinonjs__fake-timers": "8.1.2"
 	},

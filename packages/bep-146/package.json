@@ -49,7 +49,7 @@
 		"@bearmint/bep-013": "workspace:^",
 		"@bearmint/bep-016": "workspace:^",
 		"@bearmint/bep-109": "workspace:^",
-		"@bufbuild/protobuf": "0.2.0"
+		"@bufbuild/protobuf": "0.2.1"
 	},
 	"engines": {
 		"node": ">=18",

@@ -4,7 +4,7 @@ import { abci } from '@bearmint/bep-018'
 export function makeVerifyVoteExtension(): ABCIController<
 	abci.RequestVerifyVoteExtension,
 	abci.ResponseVerifyVoteExtension
-> {
+	> {
 	return {
 		async execute() {
 			return {

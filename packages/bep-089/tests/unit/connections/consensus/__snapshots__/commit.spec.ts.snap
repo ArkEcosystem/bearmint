@@ -1,0 +1,44 @@
+// Vitest Snapshot v1
+
+exports[`Commit > it should respond without any errors 1`] = `
+{
+  "data": {
+    "data": [
+      179,
+      143,
+      54,
+      217,
+      57,
+      59,
+      6,
+      240,
+      181,
+      167,
+      128,
+      184,
+      71,
+      120,
+      65,
+      244,
+      243,
+      92,
+      31,
+      191,
+      78,
+      252,
+      104,
+      198,
+      154,
+      52,
+      43,
+      148,
+      247,
+      230,
+      5,
+      17,
+    ],
+    "type": "Buffer",
+  },
+  "retainHeight": 0n,
+}
+`;

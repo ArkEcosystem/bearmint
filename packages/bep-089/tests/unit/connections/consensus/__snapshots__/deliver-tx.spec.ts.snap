@@ -1,0 +1,14 @@
+// Vitest Snapshot v1
+
+exports[`DeliverTx > it should respond without any errors 1`] = `
+{
+  "code": 0,
+  "data": {
+    "data": [],
+    "type": "Buffer",
+  },
+  "events": [],
+  "gasUsed": 5n,
+  "gasWanted": 5n,
+}
+`;

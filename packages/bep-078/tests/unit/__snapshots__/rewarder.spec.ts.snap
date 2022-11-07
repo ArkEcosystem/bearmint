@@ -1,0 +1,24 @@
+// Vitest Snapshot v1
+
+exports[`Validator Rewarder > should increase the token balance of the validator 1`] = `
+{
+  "events": [
+    {
+      "attributes": [
+        {
+          "index": false,
+          "key": "address",
+          "value": "bear1vlezq7dtyml3zu3wgfdwdglcalradfnt5xpzahl7a5478hn5g20qxd5nkr",
+        },
+        {
+          "index": false,
+          "key": "balances",
+          "value": "{\\"GOLD\\":\\"200000000\\",\\"FIRE\\":\\"0\\",\\"SEED\\":\\"0\\",\\"BEAR\\":\\"0\\"}",
+        },
+      ],
+      "type": "validator.reward",
+    },
+  ],
+  "reward": "200000000",
+}
+`;

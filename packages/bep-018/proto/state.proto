@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+option optimize_for = SPEED;
+
+message BEP21MilestoneParameters {
+  .google.protobuf.Struct application = 1;
+  .google.protobuf.Struct consensus = 2;
+  .google.protobuf.Struct denominations = 3;
+  .google.protobuf.Struct mandatory_modules = 4;
+  .google.protobuf.Struct transactions = 5;
+}
+
+message BEP21Milestone {
+  uint64 block_number = 1;
+  BEP21MilestoneParameters parameters = 2;
+}

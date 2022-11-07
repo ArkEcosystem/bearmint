@@ -1,0 +1,30 @@
+name: 'Stale'
+on:
+  schedule:
+    - cron: '30 1 * * *'
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v5
+        with:
+          # General
+          exempt-all-pr-milestones: true
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          # Issues
+          close-issue-message: 'This issue is now closed due to remaining inactive for 14 days since it was marked as stale.'
+          days-before-issue-close: 14
+          days-before-issue-stale: 14
+          exempt-issue-labels: 'awaiting-approval,work-in-progress'
+          stale-issue-label: 'no-issue-activity'
+          stale-issue-message: 'This issue is stale due to being open for 14 days without any activity. To avoid it being closed in 14 days, either comment or remove the stale label.'
+          # Pull Requests
+          close-pr-message: 'This pull request is now closed due to remaining inactive for 14 days since it was marked as stale.'
+          days-before-pr-close: 14
+          days-before-pr-stale: 14
+          exempt-pr-labels: 'awaiting-approval,work-in-progress'
+          stale-pr-label: 'no-pr-activity'
+          stale-pr-message: 'This pull request is stale due to being open for 14 days without any activity. To avoid it being closed in 14 days, either comment or remove the stale label.'

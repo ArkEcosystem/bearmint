@@ -1,0 +1,23 @@
+{
+	"all": true,
+	"branches": 100,
+	"check-coverage": true,
+	"exclude": [
+		"**/*_pb.ts",
+		"**/*.spec.ts",
+		"**/factory.ts",
+		"**/index.ts",
+		"**/proto.ts",
+		"**/tx-msg.ts",
+		"**/types.ts",
+		"commands",
+		"service-provider.ts",
+		"test"
+	],
+	"functions": 100,
+	"lines": 100,
+	"reporter": ["html", "lcov", "text"],
+	"skip-full": true,
+	"src": ["source"],
+	"statements": 100
+}

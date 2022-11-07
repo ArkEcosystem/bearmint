@@ -1,0 +1,41 @@
+// Vitest Snapshot v1
+
+exports[`Database > should get all of the entries 1`] = `[]`;
+
+exports[`Database > should get all of the entries 2`] = `
+[
+  {
+    "hash": "0a05312e302e30120673656e6465721a09726563697069656e7420012801321b0a0768616e646c6572120776657273696f6e1a076e6574776f726b",
+    "muSig": {
+      "m": 2,
+      "master": "master",
+      "n": 3,
+      "slaves": [
+        "1",
+        "2",
+        "3",
+      ],
+    },
+    "signatures": [],
+  },
+]
+`;
+
+exports[`Database > should get all of the entries 3`] = `
+[
+  {
+    "hash": "0a05312e302e30120673656e6465721a09726563697069656e7420012801321b0a0768616e646c6572120776657273696f6e1a076e6574776f726b",
+    "muSig": {
+      "m": 2,
+      "master": "master",
+      "n": 3,
+      "slaves": [
+        "1",
+        "2",
+        "3",
+      ],
+    },
+    "signatures": [],
+  },
+]
+`;

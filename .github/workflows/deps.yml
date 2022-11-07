@@ -1,0 +1,31 @@
+name: 'Dependencies'
+on:
+  schedule:
+    - cron: '0 0 * * 0' # https://crontab.guru/weekly
+jobs:
+  update:
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-major-update
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - uses: bufbuild/buf-setup-action@v1
+      - run: pnpm run deps
+      - run: pnpm install
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'chore: update dependencies (major versions)'
+          branch: ${{ github.head_ref }}

@@ -1,0 +1,10 @@
+.coverage
+.ultra.cache.json
+coverage
+distribution
+docs
+packages/**/source/*_connectweb.ts
+packages/**/source/*_pb.ts
+packages/**/source/**/*_connectweb.ts
+packages/**/source/**/*_pb.ts
+pnpm-lock.yaml

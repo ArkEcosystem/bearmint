@@ -1,0 +1,32 @@
+version: '2.1'
+services:
+  bearmint:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    image: bearmint
+    container_name: bearmint-dev
+    restart: always
+    ports:
+      - '26656:26656'
+      - '26657:26657'
+    cap_add:
+      - SYS_NICE
+      - SYS_RESOURCE
+      - SYS_TIME
+    networks:
+      - bearmint
+    volumes:
+      - bearmint:/home/node/bearmint
+      - ~/.tendermint:/home/node/.tendermint
+      - ~/.bearmint:/home/node/.bearmint
+      - /etc/localtime:/etc/localtime:ro
+    tty: true
+networks:
+  bearmint:
+volumes:
+  bearmint:
+    driver_opts:
+      type: none
+      device: $PWD/../
+      o: bind

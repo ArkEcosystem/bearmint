@@ -1,0 +1,426 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+option optimize_for = SPEED;
+
+// Basics
+message TxChecksum {
+  string handler = 1;
+  string version = 2;
+  string network = 3;
+}
+
+message TxMsg {
+  string handler = 1;
+  string version = 2;
+  string network = 3;
+  bytes content = 4;
+}
+
+message TxBody {
+  string version = 1;
+  string sender = 2;
+  string recipient = 3;
+  uint64 nonce = 4;
+  uint64 gas = 5;
+  TxMsg message = 6;
+}
+
+message SignedTx {
+  string version = 1;
+  string sender = 2;
+  string recipient = 3;
+  uint64 nonce = 4;
+  uint64 gas = 5;
+  TxMsg message = 6;
+  bytes signature = 7;
+}
+
+message TxReceipt {
+  bytes block_hash = 1;
+  uint64 block_number = 2;
+  repeated TxReceiptLog logs = 3;
+}
+
+message TxReceiptLog {
+  string event = 1;
+  .google.protobuf.Struct args = 2;
+}
+
+// Token Transfer Tx
+message BEP55MsgOp {
+  string denomination = 1;
+  uint64 amount = 2;
+  string recipient = 3;
+  optional string memo = 4;
+}
+
+message BEP55Msg {
+  repeated BEP55MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// Token Burn Tx
+message BEP56MsgOp {
+  string denomination = 1;
+  uint64 amount = 2;
+  optional string memo = 3;
+}
+
+message BEP56Msg {
+  repeated BEP56MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// Validation Registration Tx
+message BEP57Msg {
+  bytes public_key = 1;
+  bytes signature = 2;
+  optional string memo = 3;
+}
+
+message BEP57MsgHash {
+  string moniker = 1;
+  optional string memo = 2;
+}
+
+// Validator Resignation Tx
+message BEP58Msg {
+  bytes signature = 1;
+  optional string memo = 2;
+}
+
+message BEP58MsgHash {
+  string moniker = 1;
+  optional string memo = 2;
+}
+
+// Validator Distribution Tx
+message BEP59Msg {
+  string strategy = 1;
+  string strategy_args = 2;
+  bytes signature = 3;
+  optional string memo = 4;
+}
+
+message BEP59MsgHash {
+  string strategy = 1;
+  string strategy_args = 2;
+  optional string memo = 3;
+}
+
+message BEP59Strategy {
+  string strategy = 1;
+  string strategy_args = 2;
+}
+
+// HTLC Lock Tx
+message BEP64MsgOp {
+  bytes secret = 1;
+  string secret_algorithm = 2;
+  uint64 expiration = 3;
+  string denomination = 4;
+  uint64 amount = 5;
+  string recipient = 6;
+  optional string memo = 7;
+}
+
+message BEP64Msg {
+  repeated BEP64MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+message BEP64Lock {
+  string hash = 1;
+  uint32 index = 2;
+}
+
+// HTLC Claim Tx
+message BEP65MsgOp {
+  string hash = 1;
+  bytes secret = 2;
+  optional string memo = 3;
+}
+
+message BEP65Msg {
+  repeated BEP65MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// HTLC Refund Tx
+message BEP66MsgOp {
+  string hash = 1;
+  bytes secret = 2;
+  optional string memo = 3;
+}
+
+message BEP66Msg {
+  repeated BEP66MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// IPFS Tx
+message BEP67MsgOp {
+  string type = 1;
+  string value = 2;
+  optional string memo = 3;
+}
+
+message BEP67Msg {
+  repeated BEP67MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// Blob Registration Tx
+message BEP68MsgOp {
+  string mime_type = 1;
+  bytes data = 2;
+  optional string memo = 3;
+}
+
+message BEP68Msg {
+  repeated BEP68MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// Stake Tx
+message BEP104MsgOp {
+  string moniker = 1;
+  int64 stake = 2;
+  optional string memo = 3;
+}
+
+message BEP104Msg {
+  repeated BEP104MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// Name Registration Tx
+message BEP110Msg {
+  string moniker = 1;
+  optional string memo = 2;
+}
+
+// Validator "Release from Jail" Tx
+message BEP122Msg {
+  string moniker = 1;
+  bytes signature = 2;
+  optional string memo = 3;
+}
+
+message BEP122MsgHash {
+  string moniker = 1;
+  optional string memo = 2;
+}
+
+// NFT Collection Registration Tx
+message BEP126User {
+  uint32 role = 1;
+  repeated uint32 permissions = 2;
+}
+
+message BEP126Policy {
+  uint32 type = 1;
+  string name = 2;
+  string args = 3;
+}
+
+message BEP126Collection {
+  // The id of this collection (computed from `addr.txHash.idx`)
+  string id = 1;
+  // The name of this collection (e.g. Bored Ape Yacht Club)
+  string name = 2;
+  // The symbol of this collection (e.g. BAYC)
+  string symbol = 3;
+  // The prefix for the metadata URI of NFTs in this collection
+  string uri_prefix = 4;
+  // The suffix for the metadata URI of NFTs in this collection
+  string uri_suffix = 5;
+  // The NFTs in this collection (<tokenId, owner>)
+  repeated string tokens = 6;
+  // The initial owner of this collection
+  string initial_owner = 7;
+  // The current owner of this collection
+  string current_owner = 8;
+  // The ACL (Access Control List) for users of this collection
+  map<string, BEP126User> access_control_list = 9;
+  // The policies that enforce authorisation restrictions of this collection.
+  repeated BEP126Policy policies = 10;
+}
+
+message BEP126MsgOp {
+  string name = 1;
+  string symbol = 2;
+  string uri_prefix = 3;
+  string uri_suffix = 4;
+  repeated BEP126Policy policies = 5;
+  optional string memo = 6;
+}
+
+message BEP126Msg {
+  repeated BEP126MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// NFT Collection Ownership Transfer Tx
+message BEP127MsgOp {
+  string hash = 1;
+  string recipient = 2;
+  optional string memo = 3;
+}
+
+message BEP127Msg {
+  repeated BEP127MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// NFT Collection Ownership Resignation Tx
+message BEP128MsgOp {
+  string hash = 1;
+  optional string memo = 2;
+}
+
+message BEP128Msg {
+  repeated BEP128MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// NFT Collection Permission Grant Tx
+message BEP129MsgOp {
+  string hash = 1;
+  string steward = 2;
+  repeated uint32 permissions = 3;
+  optional string memo = 4;
+}
+
+message BEP129Msg {
+  repeated BEP129MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// NFT Collection Permission Revocation Tx
+message BEP130MsgOp {
+  string hash = 1;
+  string steward = 2;
+  repeated uint32 permissions = 3;
+  optional string memo = 4;
+}
+
+message BEP130Msg {
+  repeated BEP130MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// NFT Mint Tx
+message BEP131MsgOp {
+  string hash = 1;
+  string recipient = 2;
+  optional string memo = 3;
+}
+
+message BEP131Msg {
+  repeated BEP131MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+message BEP131Token {
+  // The unique ID of this NFT
+  uint32 id = 1;
+  // The unique hash of this NFT
+  string hash = 2;
+  // The id of the collection to which this NFT belongs to
+  string collection = 3;
+  // The id of the collection to which this NFT belongs to
+  string owner = 4;
+}
+
+// NFT Transfer Tx
+message BEP132MsgOp {
+  string hash = 1;
+  string recipient = 2;
+  optional string memo = 3;
+}
+
+message BEP132Msg {
+  repeated BEP132MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// NFT Burn Tx
+message BEP133MsgOp {
+  string hash = 1;
+  optional string memo = 2;
+}
+
+message BEP133Msg {
+  repeated BEP133MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// NAT Registration Tx
+message BEP134Policy {
+  uint32 type = 1;
+  string name = 2;
+  string args = 3;
+}
+
+message BEP134Token {
+  string id = 1;
+  string name = 2;
+  string denomination = 3;
+  uint32 decimals = 4;
+  uint64 initial_supply = 5;
+  repeated BEP134Policy policies = 6;
+  string current_owner = 7;
+  string initial_owner = 8;
+}
+
+message BEP134MsgOp {
+  string name = 1;
+  string denomination = 2;
+  uint32 decimals = 3;
+  uint64 initial_supply = 4;
+  repeated BEP134Policy policies = 5;
+  optional string memo = 6;
+}
+
+message BEP134Msg {
+  repeated BEP134MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// NAT Ownership Transfer Tx
+message BEP135MsgOp {
+  string hash = 1;
+  string recipient = 2;
+  optional string memo = 3;
+}
+
+message BEP135Msg {
+  repeated BEP135MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// NAT Ownership Resignation Tx
+message BEP136MsgOp {
+  string hash = 1;
+  optional string memo = 2;
+}
+
+message BEP136Msg {
+  repeated BEP136MsgOp ops = 1;
+  optional string memo = 2;
+}
+
+// NAT Mint Tx
+message BEP137MsgOp {
+  string hash = 1;
+  uint64 amount = 2;
+  optional string memo = 3;
+}
+
+message BEP137Msg {
+  repeated BEP137MsgOp ops = 1;
+  optional string memo = 2;
+}

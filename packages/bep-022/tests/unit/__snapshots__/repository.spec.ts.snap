@@ -1,0 +1,113 @@
+// Vitest Snapshot v1
+
+exports[`Repository > should index an account and find it by its address 1`] = `
+{
+  "address": "bear1vlezq7dtyml3zu3wgfdwdglcalradfnt5xpzahl7a5478hn5g20qxd5nkr",
+  "balances": {
+    "BEAR": 0n,
+    "FIRE": 0n,
+    "GOLD": 0n,
+    "SEED": 0n,
+  },
+  "lockedBalances": {
+    "BEAR": 0n,
+    "FIRE": 0n,
+    "GOLD": 0n,
+    "SEED": 0n,
+  },
+  "metadata": {},
+  "moniker": "moniker",
+  "nonce": 0n,
+  "publicKey": "134a3ccc33350717a7db79a93b5516ea0a5d4db0a60f03a08335e0c4c975d15e",
+  "stakes": {},
+  "validator": {
+    "address": "2370a54078de4a12becff8746e1c2826c9ef8b92",
+    "power": 0n,
+    "publicKey": "publicKey",
+  },
+}
+`;
+
+exports[`Repository > should index an account and find it by its public key 1`] = `
+{
+  "address": "bear1vlezq7dtyml3zu3wgfdwdglcalradfnt5xpzahl7a5478hn5g20qxd5nkr",
+  "balances": {
+    "BEAR": 0n,
+    "FIRE": 0n,
+    "GOLD": 0n,
+    "SEED": 0n,
+  },
+  "lockedBalances": {
+    "BEAR": 0n,
+    "FIRE": 0n,
+    "GOLD": 0n,
+    "SEED": 0n,
+  },
+  "metadata": {},
+  "moniker": undefined,
+  "nonce": 0n,
+  "publicKey": "134a3ccc33350717a7db79a93b5516ea0a5d4db0a60f03a08335e0c4c975d15e",
+  "stakes": {},
+  "validator": {
+    "address": "2370a54078de4a12becff8746e1c2826c9ef8b92",
+    "power": 0n,
+    "publicKey": "publicKey",
+  },
+}
+`;
+
+exports[`Repository > should index an account and find it by its validator address 1`] = `
+{
+  "address": "bear1vlezq7dtyml3zu3wgfdwdglcalradfnt5xpzahl7a5478hn5g20qxd5nkr",
+  "balances": {
+    "BEAR": 0n,
+    "FIRE": 0n,
+    "GOLD": 0n,
+    "SEED": 0n,
+  },
+  "lockedBalances": {
+    "BEAR": 0n,
+    "FIRE": 0n,
+    "GOLD": 0n,
+    "SEED": 0n,
+  },
+  "metadata": {},
+  "moniker": "moniker",
+  "nonce": 0n,
+  "publicKey": "134a3ccc33350717a7db79a93b5516ea0a5d4db0a60f03a08335e0c4c975d15e",
+  "stakes": {},
+  "validator": {
+    "address": "2370a54078de4a12becff8746e1c2826c9ef8b92",
+    "power": 0n,
+    "publicKey": "publicKey",
+  },
+}
+`;
+
+exports[`Repository > should index an account and find it by its validator moniker 1`] = `
+{
+  "address": "bear1vlezq7dtyml3zu3wgfdwdglcalradfnt5xpzahl7a5478hn5g20qxd5nkr",
+  "balances": {
+    "BEAR": 0n,
+    "FIRE": 0n,
+    "GOLD": 0n,
+    "SEED": 0n,
+  },
+  "lockedBalances": {
+    "BEAR": 0n,
+    "FIRE": 0n,
+    "GOLD": 0n,
+    "SEED": 0n,
+  },
+  "metadata": {},
+  "moniker": "moniker",
+  "nonce": 0n,
+  "publicKey": "134a3ccc33350717a7db79a93b5516ea0a5d4db0a60f03a08335e0c4c975d15e",
+  "stakes": {},
+  "validator": {
+    "address": "2370a54078de4a12becff8746e1c2826c9ef8b92",
+    "power": 0n,
+    "publicKey": "publicKey",
+  },
+}
+`;

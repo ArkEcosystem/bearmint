@@ -1,0 +1,20 @@
+{
+	"all": true,
+	"branches": 100,
+	"check-coverage": true,
+	"exclude": [
+		"**/*.spec.ts",
+		"**/index.ts",
+		"**/proto.ts",
+		"**/types.ts",
+		"service-provider.ts",
+		"commands",
+		"test"
+	],
+	"functions": 100,
+	"lines": 100,
+	"reporter": ["html", "lcov", "text"],
+	"skip-full": true,
+	"src": ["source"],
+	"statements": 100
+}

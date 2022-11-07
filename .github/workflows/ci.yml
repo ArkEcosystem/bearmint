@@ -1,0 +1,236 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - ready_for_review
+      - synchronize
+      - opened
+jobs:
+  test:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-test
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - uses: bufbuild/buf-setup-action@v1
+      - run: pnpm run build
+      - run: pnpm run test
+  format:
+    needs: test
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-format
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GH_TOKEN }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run format
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'style: resolve style guide violations'
+          branch: ${{ github.head_ref }}
+  benchmark:
+    needs: test
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-benchmark
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - uses: bufbuild/buf-setup-action@v1
+      - run: pnpm run build
+      - run: pnpm run bench
+  contributors:
+    needs: test
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-contributors
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run contributors:generate
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'docs: update contributors in README'
+  depcheck:
+    needs: test
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-depcheck
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - uses: bufbuild/buf-setup-action@v1
+      - run: pnpm run depcheck
+  dependency-review:
+    needs: test
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-dependency-review
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: actions/dependency-review-action@v2
+        with:
+          allow-licenses: MIT, ISC, BSD-3-Clause, BSD-2-Clause
+  #   automerge-dependabot-prs:
+  #     needs: test
+  #     if: >
+  #       github.event_name == 'pull_request' &&
+  #       github.event.pull_request.user.login == 'dependabot[bot]'
+  #     concurrency:
+  #       group: ${{ github.head_ref }}-automerge-dependabot-prs
+  #       cancel-in-progress: true
+  #     runs-on: ubuntu-latest
+  #     steps:
+  #       - uses: fastify/github-action-merge-dependabot@v3
+  #         with:
+  #           github-token: ${{ secrets.GITHUB_TOKEN }}
+  #           target: major
+  release-latest:
+    needs: test
+    if: >
+      github.ref_name == 'main' &&
+      startsWith(github.event.head_commit.message, 'chore(release):')
+    concurrency:
+      group: ${{ github.head_ref }}-release-latest
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - uses: bufbuild/buf-setup-action@v1
+      - run: pnpm run build
+      - run: bash scripts/release.sh ${{ secrets.NPM_TOKEN }}
+#   release-next:
+#     needs: test
+#     if: >
+#       github.ref_name == 'next' &&
+#       startsWith(github.event.head_commit.message, 'chore(release):')
+#     concurrency:
+#       group: ${{ github.head_ref }}-release-next
+#       cancel-in-progress: true
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
+#           persist-credentials: false
+#           ref: ${{ github.head_ref }}
+#       - uses: pnpm/action-setup@v2
+#         with:
+#           run_install: true
+#           version: latest
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: 18.x
+#       - run: pnpm run build
+#       - run: bash scripts/release-next.sh ${{ secrets.NPM_TOKEN }}
+# release-semantic:
+#   needs: test
+#   if: github.ref_name == 'main' || github.ref_name == 'next'
+#   concurrency:
+#     group: ${{ github.head_ref }}-release-semantic
+#     cancel-in-progress: true
+#   runs-on: ubuntu-latest
+#   steps:
+#     - uses: actions/checkout@v3
+#       with:
+#         fetch-depth: 0
+#         persist-credentials: false
+#         ref: ${{ github.head_ref }}
+#     - uses: pnpm/action-setup@v2
+#       with:
+#         run_install: true
+#         version: latest
+#     - uses: actions/setup-node@v3
+#       with:
+#         node-version: 18.x
+#     - name: Build
+#       run: pnpm run build
+#     - name: Test
+#       run: pnpm run test
+#     - name: Release
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#       run: npx semantic-release

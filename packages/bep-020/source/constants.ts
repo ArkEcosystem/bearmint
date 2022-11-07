@@ -1,0 +1,8 @@
+export const STORE_ACCOUNT = '@bearmint/bep-020/account'
+export const STORE_ACCOUNT_MONIKER = '@bearmint/bep-020/account_moniker'
+export const STORE_ACCOUNT_PUBLIC_KEY = '@bearmint/bep-020/account_public_key'
+export const STORE_ACCOUNT_VALIDATOR_ADDRESS = '@bearmint/bep-020/account_validator_address'
+export const STORE_MILESTONE = '@bearmint/bep-020/milestone'
+export const STORE_TX = '@bearmint/bep-020/tx'
+export const STORE_TX_RECEIPT = '@bearmint/bep-020/tx_receipt'
+export const STORE_WORLD = '@bearmint/bep-020/world'

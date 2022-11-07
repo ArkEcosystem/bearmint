@@ -1,0 +1,22 @@
+# This is a TOML configuration file (https://toml.io/en/)
+
+################################################################################
+### P2P Configuration
+################################################################################
+[p2p]
+
+# Comma separated list of node addresses that we should refuse to communicate with
+blacklist_by_addr = ''
+
+# Comma separated list of node ids that we should refuse to communicate with
+blacklist_by_id = ''
+
+################################################################################
+### Module Configuration
+################################################################################
+[modules."@bearmint/bep-026"]
+level = "debug"
+
+[[modules."@bearmint/bep-100".hosts]]
+host = "http://railway.test/api"
+token = ""

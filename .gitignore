@@ -1,0 +1,16 @@
+!packages/**/*-lock
+!packages/**/vendor
+.turbo
+.vscode
+*.log
+*.mdb
+*.pid
+*.seed
+*.svg
+**/coverage
+coverage
+distribution
+node_modules
+npm-debug.log*
+package-lock.json
+source/merkle.db

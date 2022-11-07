@@ -1,0 +1,16 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"entryPoints": ["source"],
+	"exclude": ["*.spec.ts"],
+	"excludePrivate": true,
+	"excludeProtected": true,
+	"gitRevision": "main",
+	"githubPages": false,
+	"includeVersion": true,
+	"out": "docs",
+	"plugin": ["typedoc-plugin-markdown"],
+	"readme": "none",
+	"validation": {
+		"notExported": false
+	}
+}

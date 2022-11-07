@@ -1,0 +1,23 @@
+// Vitest Snapshot v1
+
+exports[`makeInfo > it should respond without any errors 1`] = `
+{
+  "appVersion": 10000n,
+  "data": "Bearmint",
+  "lastBlockAppHash": {
+    "data": [
+      100,
+      101,
+      97,
+      100,
+      98,
+      101,
+      101,
+      102,
+    ],
+    "type": "Buffer",
+  },
+  "lastBlockHeight": 1n,
+  "version": "1.0.0",
+}
+`;

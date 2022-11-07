@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`Service Provider Config > should get, set and unset values 1`] = `
+{
+  "key": "value",
+}
+`;

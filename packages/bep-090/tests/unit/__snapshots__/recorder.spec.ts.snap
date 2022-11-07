@@ -1,0 +1,93 @@
+// Vitest Snapshot v1
+
+exports[`Event Recorder > should capture errors 1`] = `
+Event {
+  "attributes": [
+    EventAttribute {
+      "index": false,
+      "key": "key1",
+      "value": "key1",
+    },
+    EventAttribute {
+      "index": false,
+      "key": "key2",
+      "value": "key2",
+    },
+    EventAttribute {
+      "index": false,
+      "key": "key3",
+      "value": "key3",
+    },
+  ],
+  "type": "type",
+}
+`;
+
+exports[`Event Recorder > should capture errors 2`] = `
+Event {
+  "attributes": [
+    EventAttribute {
+      "index": false,
+      "key": "key1",
+      "value": "key1",
+    },
+    EventAttribute {
+      "index": false,
+      "key": "key2",
+      "value": "key2",
+    },
+    EventAttribute {
+      "index": false,
+      "key": "key3",
+      "value": "key3",
+    },
+  ],
+  "type": "type",
+}
+`;
+
+exports[`Event Recorder > should capture events 1`] = `
+Event {
+  "attributes": [
+    EventAttribute {
+      "index": false,
+      "key": "key1",
+      "value": "key1",
+    },
+    EventAttribute {
+      "index": false,
+      "key": "key2",
+      "value": "key2",
+    },
+    EventAttribute {
+      "index": false,
+      "key": "key3",
+      "value": "key3",
+    },
+  ],
+  "type": "type",
+}
+`;
+
+exports[`Event Recorder > should capture events 2`] = `
+Event {
+  "attributes": [
+    EventAttribute {
+      "index": false,
+      "key": "key1",
+      "value": "key1",
+    },
+    EventAttribute {
+      "index": false,
+      "key": "key2",
+      "value": "key2",
+    },
+    EventAttribute {
+      "index": false,
+      "key": "key3",
+      "value": "key3",
+    },
+  ],
+  "type": "type",
+}
+`;

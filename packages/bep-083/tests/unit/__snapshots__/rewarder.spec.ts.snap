@@ -1,0 +1,58 @@
+// Vitest Snapshot v1
+
+exports[`Delegator Rewarder > should distribute rewards when the mode is \`delegated\` 1`] = `
+[
+  Event {
+    "attributes": [
+      EventAttribute {
+        "index": false,
+        "key": "delegator.address",
+        "value": "bear1yenxkn0ln2se57zfsxprgua9fz3fvqwuj9twxq83vhvqtw6nn4ss6xhfdx",
+      },
+      EventAttribute {
+        "index": false,
+        "key": "delegator.balances",
+        "value": "{\\"FIRE\\":\\"0\\",\\"GOLD\\":\\"80000000\\",\\"SEED\\":\\"0\\",\\"BEAR\\":\\"0\\"}",
+      },
+      EventAttribute {
+        "index": false,
+        "key": "validator.address",
+        "value": "bear1vlezq7dtyml3zu3wgfdwdglcalradfnt5xpzahl7a5478hn5g20qxd5nkr",
+      },
+      EventAttribute {
+        "index": false,
+        "key": "validator.balances",
+        "value": "{\\"FIRE\\":\\"0\\",\\"GOLD\\":\\"120000000\\",\\"SEED\\":\\"0\\",\\"BEAR\\":\\"0\\"}",
+      },
+    ],
+    "type": "delegator.reward",
+  },
+  Event {
+    "attributes": [
+      EventAttribute {
+        "index": false,
+        "key": "delegator.address",
+        "value": "bear1zd9renpnx5r30f7m0x5nk4gkag996nds5c8s8gyrxhsvfjt4690qxdkwq3",
+      },
+      EventAttribute {
+        "index": false,
+        "key": "delegator.balances",
+        "value": "{\\"FIRE\\":\\"0\\",\\"GOLD\\":\\"20000000\\",\\"SEED\\":\\"0\\",\\"BEAR\\":\\"0\\"}",
+      },
+      EventAttribute {
+        "index": false,
+        "key": "validator.address",
+        "value": "bear1vlezq7dtyml3zu3wgfdwdglcalradfnt5xpzahl7a5478hn5g20qxd5nkr",
+      },
+      EventAttribute {
+        "index": false,
+        "key": "validator.balances",
+        "value": "{\\"FIRE\\":\\"0\\",\\"GOLD\\":\\"100000000\\",\\"SEED\\":\\"0\\",\\"BEAR\\":\\"0\\"}",
+      },
+    ],
+    "type": "delegator.reward",
+  },
+]
+`;
+
+exports[`Delegator Rewarder > should not distribute rewards when the mode is \`standard\` 1`] = `[]`;

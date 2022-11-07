@@ -1,0 +1,15 @@
+// Vitest Snapshot v1
+
+exports[`Find or Create Recipient > should capture an event if the tx recipient cannot be verified 1`] = `
+Event {
+  "attributes": [],
+  "type": "find-or-create-recipient-fail-verify",
+}
+`;
+
+exports[`Find or Create Recipient > should exit early if the recipient account already exists 1`] = `
+Event {
+  "attributes": [],
+  "type": "find-or-create-recipient-already-exists",
+}
+`;

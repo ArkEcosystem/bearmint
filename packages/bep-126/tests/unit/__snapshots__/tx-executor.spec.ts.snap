@@ -1,0 +1,41 @@
+// Vitest Snapshot v1
+
+exports[`Tx Executor > should attach the collection to the sender 1`] = `
+BEP126Collection {
+  "accessControlList": {
+    "bear15z20cwcgszr54v7w7pxulyv3pyqjz878rmvzqtjf2sqphz7gv4hrz0f44vuwgx57qy6h0c064x3rw44zxpl": BEP126User {
+      "permissions": [
+        0,
+        1,
+        2,
+      ],
+      "role": 0,
+    },
+  },
+  "currentOwner": "bear15z20cwcgszr54v7w7pxulyv3pyqjz878rmvzqtjf2sqphz7gv4hrz0f44vuwgx57qy6h0c064x3rw44zxpl",
+  "id": "e2abe831494bd6d8642810cb11e2d36944abb2206c40ac5f24be73d92258dfa9",
+  "initialOwner": "bear15z20cwcgszr54v7w7pxulyv3pyqjz878rmvzqtjf2sqphz7gv4hrz0f44vuwgx57qy6h0c064x3rw44zxpl",
+  "name": "name",
+  "policies": [
+    BEP126Policy {
+      "args": "",
+      "name": "@bearmint/bep-145",
+      "type": 0,
+    },
+    BEP126Policy {
+      "args": "",
+      "name": "@bearmint/bep-145",
+      "type": 1,
+    },
+    BEP126Policy {
+      "args": "",
+      "name": "@bearmint/bep-145",
+      "type": 2,
+    },
+  ],
+  "symbol": "symbol",
+  "tokens": [],
+  "uriPrefix": "uriPrefix",
+  "uriSuffix": "uriSuffix",
+}
+`;

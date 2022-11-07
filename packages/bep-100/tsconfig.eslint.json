@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"lib": ["dom", "es2021"],
+		"outDir": "distribution"
+	},
+	"exclude": ["node_modules", "test/**/**.ts"],
+	"extends": "../../config/tsconfig.json",
+	"include": ["source/**/**.ts", "test/**/**.ts"]
+}

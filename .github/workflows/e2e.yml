@@ -1,0 +1,592 @@
+name: E2E
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - ready_for_review
+      - synchronize
+      - opened
+env:
+  BM_APP: ${GITHUB_WORKSPACE}/examples/bear/app.mjs
+  BM_CLI: ${GITHUB_WORKSPACE}/packages/bep-117/bin/index.mjs
+  BM_GEN: ${GITHUB_WORKSPACE}/examples/bear/genesis-node.mjs
+  TENDER: ${GITHUB_WORKSPACE}/bin/tendermint_0.37.0-alpha.2_linux_amd64
+jobs:
+  bep-055:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-055
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-055 && pnpm run test:e2e
+  bep-056:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-056
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-056 && pnpm run test:e2e
+  bep-057:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-057
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-057 && pnpm run test:e2e
+  bep-058:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-058
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-058 && pnpm run test:e2e
+  bep-059:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-059
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-059 && pnpm run test:e2e
+  bep-064:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-064
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-064 && pnpm run test:e2e
+  bep-065:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-065
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-065 && pnpm run test:e2e
+  bep-066:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-066
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-066 && pnpm run test:e2e
+  bep-067:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-067
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-067 && pnpm run test:e2e
+  bep-068:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-068
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-068 && pnpm run test:e2e
+  bep-104:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-104
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-104 && pnpm run test:e2e
+  bep-110:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-110
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-110 && pnpm run test:e2e
+  bep-126:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-126
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-126 && pnpm run test:e2e
+  bep-127:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-127
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-127 && pnpm run test:e2e
+  bep-128:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-128
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-128 && pnpm run test:e2e
+  bep-129:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-129
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-129 && pnpm run test:e2e
+  bep-130:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-130
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-130 && pnpm run test:e2e
+  bep-131:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-131
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-131 && pnpm run test:e2e
+  bep-132:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-132
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-132 && pnpm run test:e2e
+  bep-133:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-133
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-133 && pnpm run test:e2e
+  bep-134:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-134
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-134 && pnpm run test:e2e
+  bep-135:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-135
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-135 && pnpm run test:e2e
+  bep-136:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-136
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-136 && pnpm run test:e2e
+  bep-137:
+    if: github.event.pull_request.draft == false
+    concurrency:
+      group: ${{ github.head_ref }}-bep-137
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
+          version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: pnpm run build
+      - run: node ${{ env.BM_GEN }}
+      - run: node ${{ env.BM_APP }} &
+      - run: ${{ env.TENDER }} start &
+      - run: cd packages/bep-137 && pnpm run test:e2e

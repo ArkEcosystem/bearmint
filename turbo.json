@@ -1,0 +1,66 @@
+{
+	"$schema": "https://turborepo.org/schema.json",
+	"globalEnv": [
+		"BM_CACHE_PATH",
+		"BM_CONFIG_PATH",
+		"BM_DATA_PATH",
+		"BM_LOG_PATH",
+		"BM_TEMP_PATH",
+		"BMHOME",
+		"NODE_ENV",
+		"TM_BINARY",
+		"TM_SPAWN",
+		"TMHOME"
+	],
+	"pipeline": {
+		"audit": {
+			"cache": false
+		},
+		"bench": {
+			"cache": false
+		},
+		"build": {
+			"cache": false,
+			"dependsOn": ["^build"],
+			"inputs": ["*.proto", "source/**/*.ts", "package.json"],
+			"outputs": ["distribution/**"]
+		},
+		"clean": {
+			"inputs": ["package.json"],
+			"outputs": []
+		},
+		"deps:major": {
+			"cache": false
+		},
+		"depcheck": {
+			"cache": false
+		},
+		"docs": {
+			"cache": false
+		},
+		"knip": {
+			"cache": false
+		},
+		"lint": {
+			"cache": false
+		},
+		"prettier": {
+			"cache": false
+		},
+		"proto:format": {
+			"cache": false
+		},
+		"test": {
+			"cache": false,
+			"dependsOn": [],
+			"inputs": ["source/**/*.ts", "tests/**/*.ts"],
+			"outputs": []
+		},
+		"test:coverage": {
+			"cache": false,
+			"dependsOn": [],
+			"inputs": ["source/**/*.ts", "tests/**/*.ts"],
+			"outputs": []
+		}
+	}
+}

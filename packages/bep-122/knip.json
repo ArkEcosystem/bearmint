@@ -1,0 +1,5 @@
+{
+	"dev": true,
+	"entryFiles": ["source/index.ts", "tests/**/*.spec.ts"],
+	"projectFiles": ["source/**/*.ts", "tests/**/*.ts"]
+}

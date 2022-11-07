@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"outDir": "distribution",
+		"typeRoots": ["node_modules/@types"]
+	},
+	"exclude": ["node_modules", "test/**/**.ts"],
+	"extends": "../../config/tsconfig.json",
+	"include": ["source/**/**.ts"]
+}

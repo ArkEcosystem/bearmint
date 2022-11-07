@@ -1,0 +1,56 @@
+// Vitest Snapshot v1
+
+exports[`Tx Integration > should run through the entire lifecycle of processing the tx 1`] = `
+BEP126Collection {
+  "accessControlList": {
+    "bear15z20cwcgszr54v7w7pxulyv3pyqjz878rmvzqtjf2sqphz7gv4hrz0f44vuwgx57qy6h0c064x3rw44zxpl": BEP126User {
+      "permissions": [
+        0,
+        1,
+        2,
+      ],
+      "role": 0,
+    },
+  },
+  "currentOwner": "bear15z20cwcgszr54v7w7pxulyv3pyqjz878rmvzqtjf2sqphz7gv4hrz0f44vuwgx57qy6h0c064x3rw44zxpl",
+  "id": "e2abe831494bd6d8642810cb11e2d36944abb2206c40ac5f24be73d92258dfa9",
+  "initialOwner": "bear15z20cwcgszr54v7w7pxulyv3pyqjz878rmvzqtjf2sqphz7gv4hrz0f44vuwgx57qy6h0c064x3rw44zxpl",
+  "name": "name",
+  "policies": [],
+  "symbol": "symbol",
+  "tokens": [],
+  "uriPrefix": "uriPrefix",
+  "uriSuffix": "uriSuffix",
+}
+`;
+
+exports[`Tx Integration > should run through the entire lifecycle of processing the tx 2`] = `
+BEP126Collection {
+  "accessControlList": {
+    "bear138tv5yadjee60usvg30cechd50j9s8uqlf5pedc0g3whuagsrrxh8mupyma8jcen9v8lcjjpqvr925m9m5s": BEP126User {
+      "permissions": [
+        0,
+        1,
+      ],
+      "role": 1,
+    },
+    "bear15z20cwcgszr54v7w7pxulyv3pyqjz878rmvzqtjf2sqphz7gv4hrz0f44vuwgx57qy6h0c064x3rw44zxpl": BEP126User {
+      "permissions": [
+        0,
+        1,
+        2,
+      ],
+      "role": 0,
+    },
+  },
+  "currentOwner": "bear15z20cwcgszr54v7w7pxulyv3pyqjz878rmvzqtjf2sqphz7gv4hrz0f44vuwgx57qy6h0c064x3rw44zxpl",
+  "id": "e2abe831494bd6d8642810cb11e2d36944abb2206c40ac5f24be73d92258dfa9",
+  "initialOwner": "bear15z20cwcgszr54v7w7pxulyv3pyqjz878rmvzqtjf2sqphz7gv4hrz0f44vuwgx57qy6h0c064x3rw44zxpl",
+  "name": "name",
+  "policies": [],
+  "symbol": "symbol",
+  "tokens": [],
+  "uriPrefix": "uriPrefix",
+  "uriSuffix": "uriSuffix",
+}
+`;

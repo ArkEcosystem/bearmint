@@ -1,0 +1,127 @@
+// Vitest Snapshot v1
+
+exports[`Tx Executor > should attach [base32cid] to the sender 1`] = `
+{
+  "type": "base32cid",
+  "value": "bafybeie5gq4jxvzmsym6hjlwxej4rwdoxt7wadqvmmwbqi7r27fclha2va",
+}
+`;
+
+exports[`Tx Executor > should attach [cid] to the sender 1`] = `
+{
+  "type": "cid",
+  "value": "bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5q",
+}
+`;
+
+exports[`Tx Executor > should attach [cid] to the sender 2`] = `
+{
+  "type": "cid",
+  "value": "QmYjtig7VJQ6XsnUjqqJvj7QaMcCAwtrgNdahSiFofrE7o",
+}
+`;
+
+exports[`Tx Executor > should attach [cid] to the sender 3`] = `
+{
+  "type": "cid",
+  "value": "zdj7WWeQ43G6JJvLWQWZpyHuAMq6uYWRjkBXFad11vE2LHhQ7",
+}
+`;
+
+exports[`Tx Executor > should attach [cidPath] to the sender 1`] = `
+{
+  "type": "cidPath",
+  "value": "QmYjtig7VJQ6XsnUjqqJvj7QaMcCAwtrgNdahSiFofrE7o/path/to/file",
+}
+`;
+
+exports[`Tx Executor > should attach [ipfsPath] to the sender 1`] = `
+{
+  "type": "ipfsPath",
+  "value": "/ipfs/QmYjtig7VJQ6XsnUjqqJvj7QaMcCAwtrgNdahSiFofrE7o",
+}
+`;
+
+exports[`Tx Executor > should attach [ipfsSubdomain] to the sender 1`] = `
+{
+  "type": "ipfsSubdomain",
+  "value": "http://bafybeie5gq4jxvzmsym6hjlwxej4rwdoxt7wadqvmmwbqi7r27fclha2va.ipfs.dweb.link",
+}
+`;
+
+exports[`Tx Executor > should attach [ipfsUrl] to the sender 1`] = `
+{
+  "type": "ipfsUrl",
+  "value": "https://ipfs.io/ipfs/QmYjtig7VJQ6XsnUjqqJvj7QaMcCAwtrgNdahSiFofrE7o",
+}
+`;
+
+exports[`Tx Executor > should attach [ipnsPath] to the sender 1`] = `
+{
+  "type": "ipnsPath",
+  "value": "/ipns/github.com",
+}
+`;
+
+exports[`Tx Executor > should attach [ipnsSubdomain] to the sender 1`] = `
+{
+  "type": "ipnsSubdomain",
+  "value": "http://bafybeiabc2xofh6tdi6vutusorpumwcikw3hf3st4ecjugo6j52f6xwc6q.ipns.dweb.link",
+}
+`;
+
+exports[`Tx Executor > should attach [ipnsUrl] to the sender 1`] = `
+{
+  "type": "ipnsUrl",
+  "value": "https://ipfs.io/ipns/github.com",
+}
+`;
+
+exports[`Tx Executor > should attach [multiaddr] to the sender 1`] = `
+{
+  "type": "multiaddr",
+  "value": "/ip4/127.0.0.1/udp/1234",
+}
+`;
+
+exports[`Tx Executor > should attach [multihash] to the sender 1`] = `
+{
+  "type": "multihash",
+  "value": "QmYjtig7VJQ6XsnUjqqJvj7QaMcCAwtrgNdahSiFofrE7o",
+}
+`;
+
+exports[`Tx Executor > should attach [path] to the sender 1`] = `
+{
+  "type": "path",
+  "value": "/ipfs/QmYjtig7VJQ6XsnUjqqJvj7QaMcCAwtrgNdahSiFofrE7o",
+}
+`;
+
+exports[`Tx Executor > should attach [peerMultiaddr] to the sender 1`] = `
+{
+  "type": "peerMultiaddr",
+  "value": "/p2p/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4",
+}
+`;
+
+exports[`Tx Executor > should attach [subdomain] to the sender 1`] = `
+{
+  "type": "subdomain",
+  "value": "http://bafybeie5gq4jxvzmsym6hjlwxej4rwdoxt7wadqvmmwbqi7r27fclha2va.ipfs.dweb.link",
+}
+`;
+
+exports[`Tx Executor > should attach [url] to the sender 1`] = `
+{
+  "type": "url",
+  "value": "https://ipfs.io/ipfs/QmYjtig7VJQ6XsnUjqqJvj7QaMcCAwtrgNdahSiFofrE7o",
+}
+`;
+
+exports[`Tx Executor > should attach [urlOrPath] to the sender 1`] = `
+{
+  "type": "urlOrPath",
+  "value": "https://bafybeie5gq4jxvzmsym6hjlwxej4rwdoxt7wadqvmmwbqi7r27fclha2va.ipfs.dweb.link",
+}
+`;

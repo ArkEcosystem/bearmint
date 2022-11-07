@@ -1,0 +1,56 @@
+{
+    "name": "@bearmint/bep-018",
+    "version": "0.0.0",
+    "description": "This library is the official reference implementation for BEP-018 (https://bep.dev/018)",
+    "keywords": [
+        "bearmint",
+        "tendermint",
+        "blockchain",
+        "framework",
+        "modular"
+    ],
+    "homepage": "https://github.com/bearmint/bearmint",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bearmint/bearmint.git"
+    },
+    "funding": "https://funding.bearmint.com/",
+    "license": "MIT",
+    "author": "Bearmint Mining Company <hello@bearmint.com> (https://bearmint.com/)",
+    "type": "module",
+    "exports": "./distribution/index.js",
+    "types": "./distribution/index.d.ts",
+    "files": [
+        "distribution"
+    ],
+    "scripts": {
+        "audit": "pnpm audit --fix --prod",
+        "build": "pnpm run clean && pnpm run proto && tsc",
+        "build:watch": "pnpm run clean && pnpm run proto && tsc -w",
+        "clean": "rm -rf distribution",
+        "depcheck": "depcheck --ignores=@bearmint/bep-004,@bearmint/bep-005,@bearmint/bep-031,@bearmint/bep-039,@bufbuild/protoc-gen-es",
+        "deps:major": "ncu -u --target=latest",
+        "deps:minor": "ncu -u --target=minor",
+        "deps:patch": "ncu -u --target=patch",
+        "docs": "typedoc source",
+        "knip": "knip",
+        "lint": "eslint 'source/**/*.ts' --format=codeframe --config=../../config/eslintrc.js --fix",
+        "proto": "buf generate",
+        "proto:format": "buf format -w"
+    },
+    "dependencies": {
+        "@bufbuild/connect-web": "^0.3.0",
+        "@bufbuild/protobuf": "0.2.0"
+    },
+    "devDependencies": {
+        "@bufbuild/protoc-gen-connect-web": "^0.3.0",
+        "@bufbuild/protoc-gen-es": "0.2.0"
+    },
+    "engines": {
+        "node": ">=18",
+        "pnpm": ">=7.9.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}

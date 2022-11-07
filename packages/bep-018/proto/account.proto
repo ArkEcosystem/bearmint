@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+option optimize_for = SPEED;
+
+message BEP22Validator {
+  string address = 1;
+  string public_key = 2;
+  uint64 power = 3;
+  map<string, uint64> delegators = 4;
+}
+
+message BEP22Account {
+  string address = 1;
+  optional string public_key = 2;
+  optional string moniker = 3;
+  uint64 nonce = 4;
+  map<string, uint64> balances = 5;
+  map<string, uint64> locked_balances = 6;
+  map<string, uint64> stakes = 7;
+  optional BEP22Validator validator = 8;
+  .google.protobuf.Struct metadata = 9;
+}
+
+// Slashing
+message BEP101Misbehavior {
+  uint32 type = 1;
+  uint64 height = 2;
+  uint64 total_voting_power = 3;
+}
+
+// BEP118
+message BEP118Punishment {
+  uint32 percentage = 1;
+  string denomination = 2;
+}
+
+message BEP118Record {
+  BEP101Misbehavior misbehavior = 1;
+  BEP118Punishment punishment = 2;
+}
+
+message BEP118File {
+  uint32 count = 1;
+  repeated BEP118Record records = 2;
+}
+
+// BEP119
+message BEP119Punishment {
+  uint32 percentage = 1;
+  string denomination = 2;
+}
+
+message BEP119Record {
+  BEP101Misbehavior misbehavior = 1;
+  BEP119Punishment punishment = 2;
+}
+
+message BEP119File {
+  uint32 count = 1;
+  repeated BEP119Record records = 2;
+}
+
+// BEP120
+message BEP120Sentence {
+  uint64 start = 1;
+  uint64 end = 2;
+}
+
+message BEP120Record {
+  BEP101Misbehavior misbehavior = 1;
+  BEP120Sentence sentence = 2;
+}
+
+message BEP120File {
+  uint32 count = 1;
+  bool jailed = 2;
+  repeated BEP120Record records = 3;
+}
+
+// BEP88
+message BEP88Validator {
+  map<string, uint64> delegators = 1;
+}

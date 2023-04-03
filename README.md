@@ -1,5 +1,8 @@
 ## What Is Bearmint?
 
+> **Warning**
+> Bearmint is an experimental product and should only be used for testing purposes. It is not intended for use in production environments and should be used at your own risk.
+
 **Bearmint** is a Blockchain Framework that is developed on top of and interacts with [Tendermint](https://tendermint.com/) via its [Application Blockchain Interface](https://docs.tendermint.com/master/spec/abci/) to facilitate the application's lifecycle. Bearmint is responsible for handling state management and persistence. The onus is thus on the developer to implement the various transactions that manipulate this state. Its primary purpose is to remove some of the major roadblocks to Blockchain development, thus making it less intimidating and time-consuming for developers.
 
 ## Releases
